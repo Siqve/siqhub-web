@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "upload-old": "ssh root@192.168.0.30 \"rm -rf /www/iot-web-server\" && scp -r src/old root@192.168.0.30:/www/iot-web-server"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.0.15",
