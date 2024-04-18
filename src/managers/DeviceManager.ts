@@ -1,6 +1,8 @@
 import { getCookie, hasCookie } from "@/managers/CookieManager";
+import { DEVICE_TYPE, DeviceType } from "@/app/constants";
 
 export type Device = {
+    type: DeviceType;
     name: string;
     ip: string;
     gradientClass: string;
@@ -10,6 +12,7 @@ export type Device = {
 const DEVICES_COOKIE = "devices";
 const DEFAULT_DEVICES: Device[] = [
     {
+        type: DEVICE_TYPE.LED_STRIP,
         name: "Desk",
         ip: "192.168.0.200",
         gradientClass:
@@ -17,6 +20,7 @@ const DEFAULT_DEVICES: Device[] = [
         textClass: "text-c_pink-100",
     },
     {
+        type: DEVICE_TYPE.LAMP,
         name: "Black",
         ip: "192.168.0.201",
         gradientClass: "bg-gradient-to-br from-c_blue-300 to-c_purple-500",
