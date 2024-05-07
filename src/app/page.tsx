@@ -1,10 +1,10 @@
-import { MainHeader } from "@components/MainHeader";
+import { HomeHeader } from "@components/home/HomeHeader";
 import { DeviceList } from "@/containers/DeviceList";
 
 const Home = () => {
     return (
         <div>
-            <MainHeader />
+            <HomeHeader headerText="Home"/>
             <DeviceList/>
         </div>
     );
