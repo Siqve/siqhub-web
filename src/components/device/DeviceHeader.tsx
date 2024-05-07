@@ -1,27 +1,36 @@
-import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
+import { X } from "@phosphor-icons/react/dist/ssr";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../../tailwind.config";
 import Link from "next/link";
-import { Config } from "tailwindcss";
+import { Device } from "@/types/Device";
+import { HueGraphic } from "@components/graphic/HueGraphic";
 
-export const DeviceHeader = ({ name }: { name: string }) => {
+export const DeviceHeader = ({ device }: { device: Device }) => {
     const fullConfig = resolveConfig(tailwindConfig);
     type configWithCustomColor = typeof fullConfig & {
-        theme: { colors: { text: { main: string } } };
+        theme: { colors: { text: { "header-main": string } } };
     };
 
     return (
-        <div className="flex items-center gap-4 border-b pt-3">
+        <div className="flex items-center justify-between gap-4 border-b border-text-header-main p-6">
+            <div className="flex items-center gap-3">
+                <HueGraphic
+                    graphicType={device.type}
+                    fillColorClass="fill-text-header-main"
+                    height="3em"
+                />
+                <h2 className="text-5xl">{device.name}</h2>
+            </div>
             <Link href="/">
-                <ArrowLeft
+                <X
                     color={
-                        (fullConfig as configWithCustomColor).theme.colors.text
-                            .main
+                        (fullConfig as configWithCustomColor).theme.colors.text[
+                            "header-main"
+                        ]
                     }
-                    size="54"
+                    size="42"
                 />
             </Link>
-            <h2 className="text-5xl">{name}</h2>
         </div>
     );
 };
