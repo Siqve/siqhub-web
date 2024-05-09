@@ -1,5 +1,5 @@
 import { getDeviceList } from "@/managers/DeviceManager";
-import { DeviceIcon } from "@components/home/DeviceIcon";
+import { DeviceIcon } from "@components/DeviceIcon";
 
 export const DeviceList = async () => {
     const devices = await getDeviceList();
