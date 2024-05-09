@@ -1,4 +1,4 @@
-import type {Config} from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 const colors = {
     c_gray: {
@@ -17,7 +17,7 @@ const colors = {
     c_violet: {
         500: "#A8A0E4",
         300: "#BEB8EB",
-        100: "#E2DFF6"
+        100: "#E2DFF6",
     },
     c_pink: {
         700: "#F2404F",
@@ -34,8 +34,8 @@ const colors = {
         300: "#636ACF",
         200: "#8288D9",
         100: "#A2A6E2",
-    }
-}
+    },
+};
 
 const config: Config = {
     content: [
@@ -44,6 +44,14 @@ const config: Config = {
         "./src/containers/**/*.{js,ts,jsx,tsx,mdx}",
         "./src/managers/**/*.{js,ts,jsx,tsx,mdx}",
         "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    ],
+    safelist: [
+        // Pink
+        "bg-gradient-to-br from-c_pink-500 to-90% to-c_purple-700",
+        "text-c_pink-100",
+        // Blue,
+        "bg-gradient-to-br from-c_blue-300 to-c_purple-500",
+        "text-c_blue-100",
     ],
     theme: {
         extend: {
