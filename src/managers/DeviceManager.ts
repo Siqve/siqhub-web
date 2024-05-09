@@ -1,6 +1,6 @@
 import { Device } from "@/types/Device";
-import { getDevicesFromFirebase } from "@/app/actions/firebase/get_devices";
-import { getDeviceFromFirebase } from "@/app/actions/firebase/get_device";
+import { getDevicesFromFirebase } from "@actions/firebase/get_devices";
+import { getDeviceFromFirebase } from "@actions/firebase/get_device";
 
 export const getDeviceList = async (): Promise<Device[]> => {
     return getDevicesFromFirebase();
