@@ -38,6 +38,12 @@ h2 {
   @apply text-4xl;
 }
 
+.react-colorful {
+
+  width: 100% !important;
+  height: 100% !important;
+}
+
 body {
   @apply bg-gradient-to-br;
   @apply from-slate-900;
