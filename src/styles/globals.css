@@ -44,12 +44,13 @@ body {
   @apply from-base-100;
   @apply from-30%;
   @apply to-base-300;
-
-  @apply flex;
-  @apply justify-center;
 }
 
 main {
   @apply h-[100vh];
-  @apply w-[768px];
+  @apply w-full;
+  @apply max-w-[768px];
+
+  @apply flex;
+  @apply flex-col;
 }

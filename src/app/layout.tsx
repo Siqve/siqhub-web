@@ -22,7 +22,7 @@ const RootLayout = ({
     return (
         <html lang="en">
             <body className={roboto.className}>
-                <main>{children}</main>
+                {children}
             </body>
         </html>
     );
