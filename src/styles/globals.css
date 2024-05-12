@@ -22,12 +22,8 @@
   }
 }
 
-p {
-  @apply text-text-main
-}
-
-h1, h2, h3, h4 {
-  @apply text-text-header-main
+p, h1, h2, h3, h4 {
+  @apply text-text-main;
 }
 
 h1 {
@@ -39,16 +35,15 @@ h2 {
 }
 
 .react-colorful {
-
   width: 100% !important;
   height: 100% !important;
 }
 
 body {
   @apply bg-gradient-to-br;
-  @apply from-slate-900;
+  @apply from-base-100;
   @apply from-30%;
-  @apply to-pink-950;
+  @apply to-base-300;
 
   @apply flex;
   @apply justify-center;

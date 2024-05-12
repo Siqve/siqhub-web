@@ -4,7 +4,7 @@ import { DeviceList } from "@/containers/DeviceList";
 const Home = () => {
     return (
         <div>
-            <HomeHeader headerText="Home"/>
+            <HomeHeader headerText="SiqHue"/>
             <DeviceList/>
         </div>
     );

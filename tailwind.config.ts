@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const colors = {
+const customer_colors = {
     c_gray: {
         800: "#171312",
         700: "#242424",
@@ -37,6 +37,30 @@ const colors = {
     },
 };
 
+const dracula = {
+    "color-scheme": "dark",
+    primary: "#ff79c6",
+    "primary-content": "#16050e",
+    secondary: "#bd93f9",
+    "secondary-content": "#0d0815",
+    accent: "#ffb86c",
+    "accent-content": "#160c04",
+    neutral: "#414558",
+    "neutral-content": "#d6d7db",
+    "base-100": "#282a36",
+    "base-200": "#232530",
+    "base-300": "#232530",
+    "base-content": "#f8f8f2",
+    info: "#8be9fd",
+    "info-content": "#071316",
+    success: "#50fa7b",
+    "success-content": "#021505",
+    warning: "#f1fa8c",
+    "warning-content": "#141507",
+    error: "#ff5555",
+    "error-content": "#160202",
+};
+
 const config: Config = {
     content: [
         "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -61,18 +85,17 @@ const config: Config = {
                     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
             },
             colors: {
-                ...colors,
+                ...customer_colors,
+                ...dracula,
                 background: {
-                    main: colors.c_gray["700"],
+                    main: customer_colors.c_gray["700"],
                 },
                 text: {
-                    main: colors.c_violet["300"],
-                    "header-main": colors.c_violet["100"],
-                    complimentary: colors.c_pink["500"],
+                    main: dracula["base-content"],
+
                 },
             },
         },
     },
-    plugins: [],
 };
 export default config;
