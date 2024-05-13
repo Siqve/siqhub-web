@@ -44,10 +44,10 @@ body {
   @apply from-base-100;
   @apply from-30%;
   @apply to-base-300;
+  @apply h-[100vh];
 }
 
 main {
-  @apply h-[100vh];
   @apply w-full;
   @apply max-w-[768px];
 
