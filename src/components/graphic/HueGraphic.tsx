@@ -1,5 +1,6 @@
 import * as React from "react";
 import { DeviceType } from "@/types/DeviceType";
+import { ReactNode } from "react";
 
 export type GraphicProps = {
     fillColorClass?: string;
@@ -8,7 +9,7 @@ export type GraphicProps = {
 
 const GRAPHIC_MAPPING: Record<
     DeviceType,
-    ({ fillColorClass }: GraphicProps) => React.ReactNode
+    ({ fillColorClass }: GraphicProps) => ReactNode
 > = {
     [DeviceType.LED_STRIP]: LedStrip,
     [DeviceType.LAMP]: Lamp,
@@ -31,7 +32,7 @@ export const HueGraphic = ({
     return GRAPHIC_MAPPING[graphicType]({ fillColorClass, height });
 };
 
-function LedStrip({ fillColorClass, height }: GraphicProps): React.ReactNode {
+function LedStrip({ fillColorClass, height }: GraphicProps): ReactNode {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +55,7 @@ function LedStrip({ fillColorClass, height }: GraphicProps): React.ReactNode {
     );
 }
 
-function Lamp({ fillColorClass, height }: GraphicProps): React.ReactNode {
+function Lamp({ fillColorClass, height }: GraphicProps): ReactNode {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
