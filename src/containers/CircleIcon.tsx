@@ -1,11 +1,9 @@
 import clsx from "clsx";
-import Link from "next/link";
-import { Device } from "@/types/Device";
-import { HueGraphic } from "@components/graphic/HueGraphic";
+import { ReactNode } from "react";
 
 export type CircleIconProps = {
     circleClass: string;
-    children: React.ReactNode;
+    children?: ReactNode;
 };
 
 export const CircleIcon = ({ circleClass, children }: CircleIconProps) => {

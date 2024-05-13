@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Device } from "@/types/Device";
 import { HueGraphic } from "@components/graphic/HueGraphic";
-import { CircleIcon } from "@components/CircleIcon";
+import { CircleIcon } from "@/containers/CircleIcon";
 
 export const DeviceIcon = ({ device }: { device: Device }) => {
     const redirectPage = `/device/${device.id}`;
