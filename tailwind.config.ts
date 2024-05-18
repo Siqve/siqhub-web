@@ -49,7 +49,7 @@ const dracula = {
     "neutral-content": "#d6d7db",
     "base-100": "#282a36",
     "base-200": "#232530",
-    "base-300": "#232530",
+    "base-300": "#1f202a",
     "base-content": "#f8f8f2",
     info: "#8be9fd",
     "info-content": "#071316",
