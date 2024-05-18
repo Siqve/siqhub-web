@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
 import { Card } from "@/containers/Card";
+import { ReactNode } from "react";
 
 export type CardSectionProps = {
     title: string;

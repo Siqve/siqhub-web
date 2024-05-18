@@ -13,9 +13,7 @@ export async function GET(request: Request) {
         new ReadableStream({
             async start(controller) {
                 unsubscribe = createSettingsListener((settings) => {
-                    controller.enqueue(
-                        `data: ${JSON.stringify(settings)}\n\n`,
-                    );
+                    controller.enqueue(`data: ${JSON.stringify(settings)}\n\n`);
                 });
                 request.signal.addEventListener("abort", () => {
                     unsubscribe();

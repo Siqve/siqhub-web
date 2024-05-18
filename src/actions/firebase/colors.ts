@@ -1,5 +1,10 @@
 "use server";
 
+import { FIREBASE } from "@/libs/firebase/constants";
+import { db } from "@/libs/firebase/firebase";
+import { ColorDocument } from "@/libs/firebase/types";
+import { Color } from "@/types/Color";
+import { getColorFromDocumentSnapshot } from "@/utils/firebaseUtils";
 import {
     addDoc,
     collection,
@@ -11,11 +16,6 @@ import {
     QuerySnapshot,
     setDoc,
 } from "@firebase/firestore";
-import { db } from "@/libs/firebase/firebase";
-import { FIREBASE } from "@/libs/firebase/constants";
-import { getColorFromDocumentSnapshot } from "@/utils/firebaseUtils";
-import { ColorDocument } from "@/libs/firebase/types";
-import { Color } from "@/types/Color";
 
 export const getColorFromFirebase = async (colorDocumentId: string): Promise<Color | undefined> =>
     getDoc(doc(db, FIREBASE.COLLECTION.COLORS.ID, colorDocumentId)).then((documentSnapshot) => {

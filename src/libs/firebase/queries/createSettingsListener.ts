@@ -1,7 +1,7 @@
-import { doc, onSnapshot, Unsubscribe } from "@firebase/firestore";
-import { db } from "@/libs/firebase/firebase";
 import { FIREBASE } from "@/libs/firebase/constants";
+import { db } from "@/libs/firebase/firebase";
 import { SettingsDocument } from "@/libs/firebase/types";
+import { doc, onSnapshot, Unsubscribe } from "@firebase/firestore";
 
 export const createSettingsListener = (
     onSettingsUpdated: (settings: SettingsDocument) => void,

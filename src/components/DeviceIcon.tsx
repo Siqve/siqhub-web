@@ -1,7 +1,7 @@
-import Link from "next/link";
+import { CircleIcon } from "@/containers/CircleIcon";
 import { Device } from "@/types/Device";
 import { HueGraphic } from "@components/graphic/HueGraphic";
-import { CircleIcon } from "@/containers/CircleIcon";
+import Link from "next/link";
 
 export type DeviceIconProps = {
     device: Device;

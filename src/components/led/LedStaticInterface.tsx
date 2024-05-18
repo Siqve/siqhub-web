@@ -1,10 +1,10 @@
 "use client";
-import { ColorList } from "@components/ColorList";
-import { Color } from "@/types/Color";
-import { useEffect, useState } from "react";
-import { SettingsDocument } from "@/libs/firebase/types";
-import { getColorFromFirebase } from "@actions/firebase/colors";
 import { API_ROUTE } from "@/app/api/constants";
+import { SettingsDocument } from "@/libs/firebase/types";
+import { Color } from "@/types/Color";
+import { getColorFromFirebase } from "@actions/firebase/colors";
+import { ColorList } from "@components/ColorList";
+import { useEffect, useState } from "react";
 
 export const LedStaticInterface = () => {
     const [activeColor, setActiveColor] = useState<Color>();

@@ -1,10 +1,10 @@
 "use server";
 
-import { collection, doc, getDoc, getDocs, QuerySnapshot } from "@firebase/firestore";
+import { FIREBASE } from "@/libs/firebase/constants";
 import { db } from "@/libs/firebase/firebase";
 import { Device } from "@/types/Device";
-import { FIREBASE } from "@/libs/firebase/constants";
 import { getDeviceFromDocumentSnapshot } from "@/utils/firebaseUtils";
+import { collection, doc, getDoc, getDocs, QuerySnapshot } from "@firebase/firestore";
 
 export const getDeviceFromFirebase = async (
     deviceDocumentId: string,

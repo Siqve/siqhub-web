@@ -1,7 +1,7 @@
 "use client";
-import { useDebouncedCallback } from "use-debounce";
-import { HexColorPicker } from "react-colorful";
 import { useState } from "react";
+import { HexColorPicker } from "react-colorful";
+import { useDebouncedCallback } from "use-debounce";
 
 export const ColorPicker = ({ startColor }: { startColor: string }) => {
     const [value, setValue] = useState(startColor);

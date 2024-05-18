@@ -1,4 +1,3 @@
-import * as React from "react";
 import { DeviceType } from "@/types/DeviceType";
 import { ReactNode } from "react";
 

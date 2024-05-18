@@ -1,7 +1,7 @@
-import { Device } from "@/types/Device";
-import { DocumentSnapshot, getDoc } from "@firebase/firestore";
 import { ColorDocument, DeviceDocument, IconClassDocument } from "@/libs/firebase/types";
 import { Color } from "@/types/Color";
+import { Device } from "@/types/Device";
+import { DocumentSnapshot, getDoc } from "@firebase/firestore";
 
 export const getDeviceFromDocumentSnapshot = async (
     documentSnapshot: DocumentSnapshot,

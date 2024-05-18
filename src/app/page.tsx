@@ -1,5 +1,5 @@
-import { HomeHeader } from "@components/home/HomeHeader";
 import { DeviceList } from "@components/DeviceList";
+import { HomeHeader } from "@components/home/HomeHeader";
 
 const Home = () => {
     return (

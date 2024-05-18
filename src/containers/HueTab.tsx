@@ -1,6 +1,6 @@
 "use client";
-import { Children, ReactNode, useState } from "react";
 import clsx from "clsx";
+import { Children, ReactNode, useState } from "react";
 
 export type HueTabProps = {
     tabNames: string[];
