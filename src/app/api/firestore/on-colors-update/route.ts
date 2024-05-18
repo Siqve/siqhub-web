@@ -1,6 +1,6 @@
 import { sendDataWithStreamController } from "@/app/api/apiUtils";
 import { EVENT_STREAM_HEADERS } from "@/app/api/constants";
-import { createSettingsListener } from "@/libs/firebase/queries/createSettingsListener";
+import { createColorsListener } from "@/libs/firebase/queries/createColorsListener";
 import { Unsubscribe } from "@firebase/firestore";
 
 export async function GET(request: Request) {
@@ -8,8 +8,8 @@ export async function GET(request: Request) {
     return new Response(
         new ReadableStream({
             async start(controller) {
-                unsubscribe = createSettingsListener((settings) =>
-                    sendDataWithStreamController(controller, settings),
+                unsubscribe = createColorsListener((colors) =>
+                    sendDataWithStreamController(controller, colors),
                 );
                 request.signal.addEventListener("abort", () => {
                     unsubscribe();
