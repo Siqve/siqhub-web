@@ -14,10 +14,7 @@ export const DeviceIcon = ({ device }: DeviceIconProps) => {
         <div className="flex w-fit flex-col items-center gap-1">
             <Link href={redirectPage}>
                 <CircleIcon circleClass={device.gradientClass} size="large">
-                    <HueGraphic
-                        graphicType={device.type}
-                        fillColorClass="fill-slate-950"
-                    />
+                    <HueGraphic graphicType={device.type} fillColorClass="fill-slate-950" />
                 </CircleIcon>
             </Link>
             <Link href={redirectPage}>

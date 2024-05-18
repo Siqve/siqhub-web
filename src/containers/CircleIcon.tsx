@@ -17,7 +17,12 @@ export const CircleIcon = ({ circleClass, color, size, onClick, children }: Circ
     }[size ?? "medium"];
     return (
         <div
-            className={clsx("flex items-center justify-center", "rounded-full", sizeClass, circleClass)}
+            className={clsx(
+                "flex items-center justify-center",
+                "rounded-full",
+                sizeClass,
+                circleClass,
+            )}
             style={{ backgroundColor: color }}
             onClick={onClick}
         >

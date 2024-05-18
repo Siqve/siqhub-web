@@ -6,15 +6,18 @@ import { SettingsDocument } from "@/libs/firebase/types";
 export const createSettingsListener = (
     onSettingsUpdated: (settings: SettingsDocument) => void,
 ): Unsubscribe => {
-    const unsubscribe =  onSnapshot(
+    const unsubscribe = onSnapshot(
         doc(db, FIREBASE.COLLECTION.GENERAL.ID, FIREBASE.COLLECTION.GENERAL.SETTINGS.ID),
         (documentSnapshot) => {
             const data = documentSnapshot.data() as SettingsDocument;
             onSettingsUpdated(data);
         },
     );
-    setTimeout(() => {
-        unsubscribe();
-    }, 1000*60*5);
+    setTimeout(
+        () => {
+            unsubscribe();
+        },
+        1000 * 60 * 5,
+    );
     return unsubscribe;
 };

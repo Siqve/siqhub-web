@@ -5,9 +5,5 @@ export type CardProps = {
 };
 
 export const Card = ({ children }: CardProps) => {
-    return (
-        <div className="rounded-2xl shadow-[0_0_6px_1px_rgba(0,0,0,0.5)]">
-            {children}
-        </div>
-    );
+    return <div className="rounded-2xl shadow-[0_0_6px_1px_rgba(0,0,0,0.5)]">{children}</div>;
 };

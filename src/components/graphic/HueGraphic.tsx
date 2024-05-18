@@ -7,10 +7,7 @@ export type GraphicProps = {
     height?: string;
 };
 
-const GRAPHIC_MAPPING: Record<
-    DeviceType,
-    ({ fillColorClass }: GraphicProps) => ReactNode
-> = {
+const GRAPHIC_MAPPING: Record<DeviceType, ({ fillColorClass }: GraphicProps) => ReactNode> = {
     [DeviceType.LED_STRIP]: LedStrip,
     [DeviceType.LAMP]: Lamp,
 } as const;
@@ -21,11 +18,7 @@ export type HueGraphicProps = {
     height?: string;
 };
 
-export const HueGraphic = ({
-    graphicType,
-    fillColorClass,
-    height
-}: HueGraphicProps) => {
+export const HueGraphic = ({ graphicType, fillColorClass, height }: HueGraphicProps) => {
     if (!(graphicType in GRAPHIC_MAPPING)) {
         return null;
     }
@@ -34,11 +27,7 @@ export const HueGraphic = ({
 
 function LedStrip({ fillColorClass, height }: GraphicProps): ReactNode {
     return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="99 11 314 491"
-            height={height ?? "5em"}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="99 11 314 491" height={height ?? "5em"}>
             <path
                 className={fillColorClass}
                 d="M325.354 57.499a11.868 11.868 0 1 0 16.067 4.856 11.868 11.868 0 0 0-16.067-4.856ZM239.172 103.672a11.869 11.869 0 1 0 16.067 4.857 11.868 11.868 0 0 0-16.067-4.857ZM152.99 149.846a11.869 11.869 0 1 0 16.067 4.857 11.869 11.869 0 0 0-16.066-4.857ZM336.564 226.3a11.868 11.868 0 1 0-16.066-4.856 11.868 11.868 0 0 0 16.066 4.857ZM250.382 272.475a11.869 11.869 0 1 0-16.066-4.857 11.869 11.869 0 0 0 16.066 4.857ZM164.2 318.648a11.869 11.869 0 1 0-16.066-4.856 11.868 11.868 0 0 0 16.066 4.856ZM272.828 408.328a11.869 11.869 0 1 0-16.067-4.857 11.868 11.868 0 0 0 16.067 4.857ZM359.01 362.154a11.869 11.869 0 1 0-16.067-4.857 11.869 11.869 0 0 0 16.067 4.857ZM186.646 454.501a11.868 11.868 0 1 0-16.067-4.856 11.868 11.868 0 0 0 16.067 4.856ZM272.35 177.123h32.52a3.5 3.5 0 0 0 0-7h-32.52a3.5 3.5 0 0 0 0 7ZM203.63 190.498a3.5 3.5 0 0 0 3.5 3.5h32.52a3.5 3.5 0 0 0 0-7h-32.52a3.5 3.5 0 0 0-3.5 3.5Z"
@@ -57,14 +46,11 @@ function LedStrip({ fillColorClass, height }: GraphicProps): ReactNode {
 
 function Lamp({ fillColorClass, height }: GraphicProps): ReactNode {
     return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="17 2 66 96"
-            height={height ?? "5em"}
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="17 2 66 96" height={height ?? "5em"}>
             <path
                 className={fillColorClass}
-                d="M81.5 37.656a6.138 6.138 0 0 1-5.313 2.969H23.813a6.258 6.258 0 0 1-5.31-2.961 6.255 6.255 0 0 1-.284-6.07l12.5-25a6.198 6.198 0 0 1 5.594-3.47h27.375a6.198 6.198 0 0 1 5.593 3.47l12.5 25a6.17 6.17 0 0 1-.28 6.062zM68.75 90.625H53.125V50a3.124 3.124 0 1 0-6.25 0v40.625H31.25a3.124 3.124 0 1 0 0 6.25h37.5a3.124 3.124 0 1 0 0-6.25z" />
+                d="M81.5 37.656a6.138 6.138 0 0 1-5.313 2.969H23.813a6.258 6.258 0 0 1-5.31-2.961 6.255 6.255 0 0 1-.284-6.07l12.5-25a6.198 6.198 0 0 1 5.594-3.47h27.375a6.198 6.198 0 0 1 5.593 3.47l12.5 25a6.17 6.17 0 0 1-.28 6.062zM68.75 90.625H53.125V50a3.124 3.124 0 1 0-6.25 0v40.625H31.25a3.124 3.124 0 1 0 0 6.25h37.5a3.124 3.124 0 1 0 0-6.25z"
+            />
         </svg>
     );
 }

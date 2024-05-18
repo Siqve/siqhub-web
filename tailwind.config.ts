@@ -92,7 +92,6 @@ const config: Config = {
                 },
                 text: {
                     main: dracula["base-content"],
-
                 },
             },
         },

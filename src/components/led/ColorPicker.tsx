@@ -8,7 +8,9 @@ export const ColorPicker = ({ startColor }: { startColor: string }) => {
     const debounced = useDebouncedCallback((value: string) => {
         setValue(value);
     }, 50);
-    return <div className="w-[250px] h-[200px]">
-        <HexColorPicker color={value} onChange={debounced} />
-    </div>;
+    return (
+        <div className="h-[200px] w-[250px]">
+            <HexColorPicker color={value} onChange={debounced} />
+        </div>
+    );
 };

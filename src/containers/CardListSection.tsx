@@ -9,9 +9,9 @@ export type CardSectionProps = {
 export const CardListSection = ({ title, children }: CardSectionProps) => {
     return (
         <Card>
-            <div className="p-3 flex flex-col gap-2">
+            <div className="flex flex-col gap-2 p-3">
                 <h2 className="w-fit">{title}</h2>
-                <div className="flex gap-3 flex-wrap">{children}</div>
+                <div className="flex flex-wrap gap-3">{children}</div>
             </div>
         </Card>
     );

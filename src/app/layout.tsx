@@ -21,9 +21,7 @@ const RootLayout = ({
 }>) => {
     return (
         <html lang="en">
-            <body className={roboto.className}>
-                {children}
-            </body>
+            <body className={roboto.className}>{children}</body>
         </html>
     );
 };

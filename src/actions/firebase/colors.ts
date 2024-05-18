@@ -32,11 +32,9 @@ export const getColorsFromFirebase = async (): Promise<Color[]> =>
             orderBy(FIREBASE.COLLECTION.COLORS.COLUMN.CREATED_AT, "asc"),
         ),
     ).then((querySnapshot: QuerySnapshot) =>
-        Promise.all(
-            querySnapshot.docs.map((documentSnapshot) => {
-                return getColorFromDocumentSnapshot(documentSnapshot);
-            }),
-        ),
+        querySnapshot.docs.map((documentSnapshot) => {
+            return getColorFromDocumentSnapshot(documentSnapshot);
+        }),
     );
 
 /**
