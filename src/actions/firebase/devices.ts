@@ -15,7 +15,7 @@ import { getDeviceFromDocumentSnapshot } from "@/utils/firebaseUtils";
 export const getDeviceFromFirebase = async (
     deviceDocumentId: string,
 ): Promise<Device | undefined> =>
-    getDoc(doc(db, FIREBASE.COLLECTION.DEVICES, deviceDocumentId)).then((deviceDocSnapshot) => {
+    getDoc(doc(db, FIREBASE.COLLECTION.DEVICES.ID, deviceDocumentId)).then((deviceDocSnapshot) => {
         if (!deviceDocSnapshot.exists()) {
             return undefined;
         }
@@ -24,7 +24,7 @@ export const getDeviceFromFirebase = async (
 
 
 export const getDevicesFromFirebase = async (): Promise<Device[]> =>
-    getDocs(collection(db, FIREBASE.COLLECTION.DEVICES)).then(
+    getDocs(collection(db, FIREBASE.COLLECTION.DEVICES.ID)).then(
         (querySnapshot: QuerySnapshot) =>
             Promise.all(
                 querySnapshot.docs.map((deviceDocSnapshot) => {

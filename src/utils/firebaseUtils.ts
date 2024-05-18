@@ -3,21 +3,21 @@ import { DocumentSnapshot, getDoc } from "@firebase/firestore";
 import { ColorDocument, DeviceDocument, IconClassDocument } from "@/libs/firebase/types";
 import { Color } from "@/types/Color";
 
-export const getDeviceFromDocumentSnapshot = async (deviceDocSnapshot: DocumentSnapshot): Promise<Device> => {
-    const { iconClass, ...rest } = deviceDocSnapshot.data() as DeviceDocument;
+export const getDeviceFromDocumentSnapshot = async (documentSnapshot: DocumentSnapshot): Promise<Device> => {
+    const { iconClass, ...rest } = documentSnapshot.data() as DeviceDocument;
     const iconClassDoc = (await getDoc(iconClass)).data() as IconClassDocument;
     return {
-        id: deviceDocSnapshot.id,
+        id: documentSnapshot.id,
         gradientClass: iconClassDoc.gradientClass,
         textClass: iconClassDoc.textClass,
         ...rest,
     } as Device;
 }
 
-export const getColorFromDocumentSnapshot = async (deviceDocSnapshot: DocumentSnapshot): Promise<Color> => {
-    const colorData = deviceDocSnapshot.data() as ColorDocument;
+export const getColorFromDocumentSnapshot = async (documentSnapshot: DocumentSnapshot): Promise<Color> => {
+    const colorData = documentSnapshot.data() as ColorDocument;
     return {
-        id: deviceDocSnapshot.id,
+        id: documentSnapshot.id,
         ...colorData,
     } as Color;
 }

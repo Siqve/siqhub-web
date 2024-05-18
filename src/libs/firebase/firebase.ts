@@ -16,7 +16,7 @@ const firebase = {
 // Initialize Firebase
 export const app = initializeApp(firebase);
 export let analytics: Analytics | undefined;
-if (app.name && typeof window !== "undefined") {
-    analytics = getAnalytics(app);
-}
+// if (app.name && typeof window !== "undefined") {
+//     analytics = getAnalytics(app);
+// }
 export const db = getFirestore(app);

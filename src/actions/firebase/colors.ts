@@ -18,21 +18,25 @@ import { ColorDocument } from "@/libs/firebase/types";
 import { Color } from "@/types/Color";
 
 export const getColorFromFirebase = async (colorDocumentId: string): Promise<Color | undefined> =>
-    getDoc(doc(db, FIREBASE.COLLECTION.COLORS, colorDocumentId)).then((colorDocSnapshot) => {
-        if (!colorDocSnapshot.exists()) {
+    getDoc(doc(db, FIREBASE.COLLECTION.COLORS.ID, colorDocumentId)).then((documentSnapshot) => {
+        if (!documentSnapshot.exists()) {
             return undefined;
         }
-        return getColorFromDocumentSnapshot(colorDocSnapshot);
+        return getColorFromDocumentSnapshot(documentSnapshot);
     });
 
 export const getColorsFromFirebase = async (): Promise<Color[]> =>
-    getDocs(query(collection(db, FIREBASE.COLLECTION.COLORS), orderBy("createdAt", "asc"))).then(
-        (colorDocSnapshots: QuerySnapshot) =>
-            Promise.all(
-                colorDocSnapshots.docs.map((colorDocSnapshot) => {
-                    return getColorFromDocumentSnapshot(colorDocSnapshot);
-                }),
-            ),
+    getDocs(
+        query(
+            collection(db, FIREBASE.COLLECTION.COLORS.ID),
+            orderBy(FIREBASE.COLLECTION.COLORS.COLUMN.CREATED_AT, "asc"),
+        ),
+    ).then((querySnapshot: QuerySnapshot) =>
+        Promise.all(
+            querySnapshot.docs.map((documentSnapshot) => {
+                return getColorFromDocumentSnapshot(documentSnapshot);
+            }),
+        ),
     );
 
 /**
@@ -40,19 +44,19 @@ export const getColorsFromFirebase = async (): Promise<Color[]> =>
  * @returns The ID of the newly created color document.
  */
 export const createColorInFirebase = async (color: string): Promise<string> =>
-    addDoc(collection(db, FIREBASE.COLLECTION.COLORS), {
+    addDoc(collection(db, FIREBASE.COLLECTION.COLORS.ID), {
         hex: color,
         createdAt: Date.now(),
-    }).then((colorDocRef) => colorDocRef.id);
+    }).then((documentReference) => documentReference.id);
 
 export const updateColorInFirebase = async (
     colorId: string,
     colorDocument: ColorDocument,
 ): Promise<void> => {
-    const existingColor = await getDoc(doc(db, FIREBASE.COLLECTION.COLORS, colorId));
-    if (!existingColor.exists()) {
+    const documentSnapshot = await getDoc(doc(db, FIREBASE.COLLECTION.COLORS.ID, colorId));
+    if (!documentSnapshot.exists()) {
         throw new Error(`Attempted to update non-existent color with ID: ${colorId}`);
     }
 
-    return setDoc(doc(db, FIREBASE.COLLECTION.COLORS, colorId), colorDocument);
+    return setDoc(doc(db, FIREBASE.COLLECTION.COLORS.ID, colorId), colorDocument);
 };

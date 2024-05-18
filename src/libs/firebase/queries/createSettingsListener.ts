@@ -7,12 +7,9 @@ export const createSettingsListener = (
     onSettingsUpdated: (settings: SettingsDocument) => void,
 ): Unsubscribe => {
     const unsubscribe =  onSnapshot(
-        doc(db, FIREBASE.COLLECTION.GENERAL.ID, FIREBASE.COLLECTION.GENERAL.SETTINGS),
-        (settingSnapshot) => {
-            if (!settingSnapshot.exists()) {
-                return;
-            }
-            const data = settingSnapshot.data() as SettingsDocument;
+        doc(db, FIREBASE.COLLECTION.GENERAL.ID, FIREBASE.COLLECTION.GENERAL.SETTINGS.ID),
+        (documentSnapshot) => {
+            const data = documentSnapshot.data() as SettingsDocument;
             onSettingsUpdated(data);
         },
     );
