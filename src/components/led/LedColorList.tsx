@@ -1,7 +1,8 @@
 import { API_ROUTE } from "@/app/api/constants";
 import { Color } from "@/types/Color";
 import { createColorInFirestore } from "@actions/firestore/colors";
-import { ColorList } from "@components/ColorList";
+import { updateSettingsInFirestore } from "@actions/firestore/settings";
+import { IconColorList } from "@components/IconColorList";
 import { useEffect, useState } from "react";
 
 const INITIAL_COLOR = "FBFFFF";
@@ -10,9 +11,7 @@ export type ColorListProps = {
     activeColor?: Color;
 };
 
-export const LedColorList = ({
-    activeColor,
-}: ColorListProps) => {
+export const LedColorList = ({ activeColor }: ColorListProps) => {
     const [colors, setColors] = useState<Color[]>([]);
 
     const initColorsListener = () => {
@@ -21,28 +20,27 @@ export const LedColorList = ({
             const colors: Color[] = JSON.parse(event.data);
             setColors(colors);
         };
+        return settingsEventSource;
     };
 
     useEffect(() => {
-        initColorsListener();
+        const eventSource = initColorsListener();
+        return () => eventSource.close();
     }, []);
 
     const onColorSelect = (color: Color) => {
-
-    }
+        updateSettingsInFirestore({ activeColorId: color.id });
+    };
 
     const onCreateColorClick = () => {
         createColorInFirestore(INITIAL_COLOR).then((newDocument) => {
-            //     TODO: Make this creation listen to feed from an API endpoint
             const newColor: Color = { id: newDocument, hex: INITIAL_COLOR };
-            // setColors([...colors, newColor]);
-            console.log("newColor: ", newColor);
             onColorSelect(newColor);
         });
     };
 
     return (
-        <ColorList
+        <IconColorList
             colors={colors}
             activeColor={activeColor}
             onColorSelect={onColorSelect}

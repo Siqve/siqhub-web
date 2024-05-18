@@ -12,7 +12,7 @@ export type ColorListProps = {
     onCreateColorClick?: () => void;
 };
 
-export const ColorList = ({
+export const IconColorList = ({
     colors,
     activeColor,
     onColorSelect,

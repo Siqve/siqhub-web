@@ -3,7 +3,7 @@ import { API_ROUTE } from "@/app/api/constants";
 import { SettingsDocument } from "@/libs/firebase/types";
 import { Color } from "@/types/Color";
 import { getColorFromFirestore } from "@actions/firestore/colors";
-import { LedColorList } from "@components/LedColorList";
+import { LedColorList } from "@components/led/LedColorList";
 import { useEffect, useState } from "react";
 
 export const LedStaticInterface = () => {
@@ -21,17 +21,17 @@ export const LedStaticInterface = () => {
                 });
             }
         };
+        return settingsEventSource;
     };
 
     useEffect(() => {
-        initSettingsListener();
+        const eventSource = initSettingsListener();
+        return () => eventSource.close();
     }, []);
 
     return (
         <div className="mx-5">
-            <LedColorList
-                activeColor={activeColor}
-            />
+            <LedColorList activeColor={activeColor} />
         </div>
     );
 };
