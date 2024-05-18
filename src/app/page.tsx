@@ -1,5 +1,5 @@
 import { HomeHeader } from "@components/home/HomeHeader";
-import { DeviceList } from "@/containers/DeviceList";
+import { DeviceList } from "@components/DeviceList";
 
 const Home = () => {
     return (

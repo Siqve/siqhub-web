@@ -9,11 +9,11 @@ export const DeviceHeader = ({ device }: { device: Device }) => {
     return (
         <Header>
         <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
                 <HueGraphic
                     graphicType={device.type}
                     fillColorClass="fill-text-main"
-                    height="3em"
+                    height="3.5em"
                 />
                 <h2 className="text-5xl">{device.name}</h2>
             </div>

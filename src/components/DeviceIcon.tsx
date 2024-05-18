@@ -3,13 +3,17 @@ import { Device } from "@/types/Device";
 import { HueGraphic } from "@components/graphic/HueGraphic";
 import { CircleIcon } from "@/containers/CircleIcon";
 
-export const DeviceIcon = ({ device }: { device: Device }) => {
+export type DeviceIconProps = {
+    device: Device;
+};
+
+export const DeviceIcon = ({ device }: DeviceIconProps) => {
     const redirectPage = `/device/${device.id}`;
 
     return (
         <div className="flex w-fit flex-col items-center gap-1">
             <Link href={redirectPage}>
-                <CircleIcon circleClass={device.gradientClass}>
+                <CircleIcon circleClass={device.gradientClass} size="large">
                     <HueGraphic
                         graphicType={device.type}
                         fillColorClass="fill-slate-950"

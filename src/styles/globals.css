@@ -42,7 +42,6 @@ h2 {
 body {
   @apply bg-gradient-to-br;
   @apply from-base-100;
-  @apply from-30%;
   @apply to-base-300;
   @apply h-[100vh];
 }

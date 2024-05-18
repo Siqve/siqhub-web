@@ -1,6 +1,5 @@
 import { getDeviceList } from "@/managers/DeviceManager";
 import { DeviceIcon } from "@components/DeviceIcon";
-import { Card } from "@/containers/Card";
 import { CardListSection } from "@/containers/CardListSection";
 
 export const DeviceList = async () => {
