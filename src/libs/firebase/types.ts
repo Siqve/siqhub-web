@@ -11,3 +11,12 @@ export type IconClassDocument = {
     gradientClass: string;
     textClass: string;
 };
+
+export type ColorDocument = {
+    hex: string;
+    createdAt: number;
+};
+
+export type SettingsDocument = {
+    activeColorId: string;
+};
