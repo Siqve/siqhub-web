@@ -1,8 +1,13 @@
 const COLLECTIONS = {
     DEVICES: "devices",
-    ICON_CLASS: "iconClass"
+    COLORS: "colors",
+    ICON_CLASS: "iconClass",
+    GENERAL: {
+        ID: "general",
+        SETTINGS: "settings",
+    },
 } as const;
 
 export const FIREBASE = {
-    COLLECTION: COLLECTIONS
-}
+    COLLECTION: COLLECTIONS,
+};
