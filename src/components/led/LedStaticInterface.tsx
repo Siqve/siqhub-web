@@ -2,7 +2,7 @@
 import { API_ROUTE } from "@/app/api/constants";
 import { SettingsDocument } from "@/libs/firebase/types";
 import { Color } from "@/types/Color";
-import { getColorFromFirebase } from "@actions/firebase/colors";
+import { getColorFromFirestore } from "@actions/firestore/colors";
 import { LedColorList } from "@components/LedColorList";
 import { useEffect, useState } from "react";
 
@@ -16,7 +16,7 @@ export const LedStaticInterface = () => {
             const settings: SettingsDocument = JSON.parse(event.data);
 
             if (settings.activeColorId) {
-                getColorFromFirebase(settings.activeColorId).then((color) => {
+                getColorFromFirestore(settings.activeColorId).then((color) => {
                     setActiveColor(color);
                 });
             }

@@ -1,10 +1,10 @@
 import { Device } from "@/types/Device";
-import { getDeviceFromFirebase, getDevicesFromFirebase } from "@actions/firebase/devices";
+import { getDeviceFromFirestore, getDevicesFromFirestore } from "@actions/firestore/devices";
 
 export const getDeviceList = async (): Promise<Device[]> => {
-    return getDevicesFromFirebase();
+    return getDevicesFromFirestore();
 };
 
 export const getDevice = async (deviceId: string): Promise<Device | undefined> => {
-    return getDeviceFromFirebase(deviceId);
+    return getDeviceFromFirestore(deviceId);
 };

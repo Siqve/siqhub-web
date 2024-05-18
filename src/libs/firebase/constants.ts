@@ -27,6 +27,6 @@ export const COLLECTIONS = {
     GENERAL,
 } as const;
 
-export const FIREBASE = {
+export const FIRESTORE = {
     COLLECTION: COLLECTIONS,
 };

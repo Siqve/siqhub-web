@@ -1,6 +1,6 @@
 import { API_ROUTE } from "@/app/api/constants";
 import { Color } from "@/types/Color";
-import { createColorInFirebase } from "@actions/firebase/colors";
+import { createColorInFirestore } from "@actions/firestore/colors";
 import { ColorList } from "@components/ColorList";
 import { useEffect, useState } from "react";
 
@@ -32,7 +32,7 @@ export const LedColorList = ({
     }
 
     const onCreateColorClick = () => {
-        createColorInFirebase(INITIAL_COLOR).then((newDocument) => {
+        createColorInFirestore(INITIAL_COLOR).then((newDocument) => {
             //     TODO: Make this creation listen to feed from an API endpoint
             const newColor: Color = { id: newDocument, hex: INITIAL_COLOR };
             // setColors([...colors, newColor]);
