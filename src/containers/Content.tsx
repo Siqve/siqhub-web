@@ -5,5 +5,5 @@ export type ContentProps = {
 };
 
 export const Content = ({ children }: ContentProps) => {
-    return <div className="w-full max-w-content flex mx-auto flex-col">{children}</div>;
+    return <div className="mx-auto flex w-full max-w-content flex-col">{children}</div>;
 };
