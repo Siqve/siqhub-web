@@ -1,14 +1,15 @@
+import { Content } from "@/containers/Content";
 import { DeviceList } from "@components/DeviceList";
 import { HomeHeader } from "@components/home/HomeHeader";
 
 const Home = () => {
     return (
-        <div className="flex flex-col items-center">
+        <>
             <HomeHeader headerText="SiqHue" />
-            <main>
+            <Content>
                 <DeviceList />
-            </main>
-        </div>
+            </Content>
+        </>
     );
 };
 

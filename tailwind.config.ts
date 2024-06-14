@@ -94,6 +94,9 @@ const config: Config = {
                     main: dracula["base-content"],
                 },
             },
+            maxWidth: {
+                content: "768px",
+            },
         },
     },
 };

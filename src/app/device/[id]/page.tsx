@@ -1,3 +1,4 @@
+import { Content } from "@/containers/Content";
 import { getDevice } from "@/managers/DeviceManager";
 import { DeviceHeader } from "@components/device/DeviceHeader";
 import { LedStripController } from "@components/led/LedStripController";
@@ -8,10 +9,12 @@ const DevicePage = async ({ params }: { params: { id: string } }) => {
     if (!device) redirect("/");
 
     return (
-        <div>
+        <>
             <DeviceHeader device={device} />
-            <LedStripController />
-        </div>
+            <Content>
+                <LedStripController />
+            </Content>
+        </>
     );
 };
 

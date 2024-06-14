@@ -51,9 +51,6 @@ body {
 }
 
 main {
-    @apply w-full;
-    @apply max-w-[768px];
-
     @apply flex;
     @apply flex-col;
 }
