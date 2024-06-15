@@ -1,14 +1,14 @@
 import { API_ROUTE } from "@/app/api/constants";
 import { Color } from "@/types/Color";
-import { createColorInFirestore } from "@actions/firestore/colors";
-import { updateSettingsInFirestore } from "@actions/firestore/settings";
+import { createColorInFirestore, deleteColorInFirestore } from "@actions/firestore/colors";
+import { resetColorInFirestore, updateSettingsInFirestore } from "@actions/firestore/settings";
 import { IconColorList } from "@components/IconColorList";
 import { useEffect, useState } from "react";
 
 const INITIAL_COLOR = "FBFFFF";
 
 export type ColorListProps = {
-    activeColor?: Color;
+    activeColor: Color;
 };
 
 export const LedColorList = ({ activeColor }: ColorListProps) => {
@@ -39,12 +39,18 @@ export const LedColorList = ({ activeColor }: ColorListProps) => {
         });
     };
 
+    const onDeleteColorClick = () => {
+        resetColorInFirestore();
+        deleteColorInFirestore(activeColor.id);
+    };
+
     return (
         <IconColorList
             colors={colors}
             activeColor={activeColor}
             onColorSelect={onColorSelect}
             onCreateColorClick={onCreateColorClick}
+            onDeleteColorClick={onDeleteColorClick}
         />
     );
 };

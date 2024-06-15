@@ -8,14 +8,30 @@ import { getColorFromDocumentSnapshot } from "@/utils/firebaseUtils";
 import {
     addDoc,
     collection,
+    deleteDoc,
     doc,
     getDoc,
     getDocs,
+    limit,
     orderBy,
     query,
     QuerySnapshot,
     setDoc,
 } from "@firebase/firestore";
+
+export const getFirstColorFromFirestore = async (): Promise<Color | undefined> =>
+    getDocs(
+        query(
+            collection(db, FIRESTORE.COLLECTION.COLORS.ID),
+            orderBy(FIRESTORE.COLLECTION.COLORS.COLUMN.CREATED_AT, "asc"),
+            limit(1),
+        ),
+    ).then((querySnapshot: QuerySnapshot) => {
+        if (querySnapshot.empty) {
+            return undefined;
+        }
+        return getColorFromDocumentSnapshot(querySnapshot.docs[0]);
+    });
 
 export const getColorFromFirestore = async (colorDocumentId: string): Promise<Color | undefined> =>
     getDoc(doc(db, FIRESTORE.COLLECTION.COLORS.ID, colorDocumentId)).then((documentSnapshot) => {
@@ -46,6 +62,10 @@ export const createColorInFirestore = async (color: string): Promise<string> =>
         hex: color,
         createdAt: Date.now(),
     }).then((documentReference) => documentReference.id);
+
+export const deleteColorInFirestore = async (colorId: string) => {
+    await deleteDoc(doc(db, FIRESTORE.COLLECTION.COLORS.ID, colorId));
+};
 
 export const updateColorInFirestore = async (
     colorId: string,

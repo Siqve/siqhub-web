@@ -15,6 +15,7 @@ export type IconClassDocument = {
 export type ColorDocument = {
     hex: string;
     createdAt: number;
+    immutable: boolean;
 };
 
 export type SettingsDocument = {
