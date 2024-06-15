@@ -3,6 +3,7 @@ import { API_ROUTE } from "@/app/api/constants";
 import { SettingsDocument } from "@/libs/firebase/types";
 import { Color } from "@/types/Color";
 import { getColorFromFirestore } from "@actions/firestore/colors";
+import { Spinner } from "@components/Spinner";
 import { LedColorList } from "@components/led/LedColorList";
 import { useEffect, useState } from "react";
 
@@ -28,6 +29,10 @@ export const LedStaticInterface = () => {
         const eventSource = initSettingsListener();
         return () => eventSource.close();
     }, []);
+
+    if (!activeColor) {
+        return <Spinner />;
+    }
 
     return (
         <div className="mx-5">
