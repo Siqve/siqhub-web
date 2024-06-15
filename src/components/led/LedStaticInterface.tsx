@@ -2,8 +2,9 @@
 import { API_ROUTE } from "@/app/api/constants";
 import { SettingsDocument } from "@/libs/firebase/types";
 import { Color } from "@/types/Color";
-import { getColorFromFirestore } from "@actions/firestore/colors";
+import { getColorFromFirestore, updateColorInFirestore } from "@actions/firestore/colors";
 import { Spinner } from "@components/Spinner";
+import { ColorPicker } from "@components/led/ColorPicker";
 import { LedColorList } from "@components/led/LedColorList";
 import { useEffect, useState } from "react";
 
@@ -34,9 +35,15 @@ export const LedStaticInterface = () => {
         return <Spinner />;
     }
 
+    const onColorChange = (color: string) => {
+        if (activeColor.immutable) return;
+        updateColorInFirestore(activeColor.id, color);
+    };
+
     return (
-        <div className="mx-5">
+        <div className="mx-5 flex flex-col items-center gap-6">
             <LedColorList activeColor={activeColor} />
+            <ColorPicker activeColor={activeColor.hex} onChange={onColorChange} />
         </div>
     );
 };

@@ -2,7 +2,6 @@
 
 import { FIRESTORE } from "@/libs/firebase/constants";
 import { db } from "@/libs/firebase/firebase";
-import { ColorDocument } from "@/libs/firebase/types";
 import { Color } from "@/types/Color";
 import { getColorFromDocumentSnapshot } from "@/utils/firebaseUtils";
 import {
@@ -16,7 +15,7 @@ import {
     orderBy,
     query,
     QuerySnapshot,
-    setDoc,
+    updateDoc,
 } from "@firebase/firestore";
 
 export const getFirstColorFromFirestore = async (): Promise<Color | undefined> =>
@@ -67,14 +66,13 @@ export const deleteColorInFirestore = async (colorId: string) => {
     await deleteDoc(doc(db, FIRESTORE.COLLECTION.COLORS.ID, colorId));
 };
 
-export const updateColorInFirestore = async (
-    colorId: string,
-    colorDocument: ColorDocument,
-): Promise<void> => {
+export const updateColorInFirestore = async (colorId: string, colorHex: string): Promise<void> => {
     const documentSnapshot = await getDoc(doc(db, FIRESTORE.COLLECTION.COLORS.ID, colorId));
     if (!documentSnapshot.exists()) {
         throw new Error(`Attempted to update non-existent color with ID: ${colorId}`);
     }
 
-    return setDoc(doc(db, FIRESTORE.COLLECTION.COLORS.ID, colorId), colorDocument);
+    return updateDoc(doc(db, FIRESTORE.COLLECTION.COLORS.ID, colorId), {
+        hex: colorHex,
+    });
 };

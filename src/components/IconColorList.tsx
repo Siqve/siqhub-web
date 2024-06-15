@@ -30,7 +30,7 @@ export const IconColorList = ({
                     <div className="relative" key={color.id}>
                         <CircleIcon color={`#${color.hex}`} onClick={() => onColorSelect(color)}>
                             <Check
-                                color={`#${tinycolor(color.hex).darken(60).toHex()}`}
+                                color={`#${tinycolor(color.hex).darken(50).toHex()}`}
                                 size="42"
                             />
                         </CircleIcon>
