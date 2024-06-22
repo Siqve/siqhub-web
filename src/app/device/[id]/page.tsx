@@ -1,7 +1,7 @@
 import { Content } from "@/containers/Content";
 import { getDevice } from "@/managers/DeviceManager";
 import { DeviceHeader } from "@components/device/DeviceHeader";
-import { LedStripController } from "@components/led/LedStripController";
+import { LedStripController } from "@components/controllers/LedStripController";
 import { redirect } from "next/navigation";
 
 const DevicePage = async ({ params }: { params: { id: string } }) => {
