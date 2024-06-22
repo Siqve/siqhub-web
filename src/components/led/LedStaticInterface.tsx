@@ -4,7 +4,7 @@ import { SettingsDocument } from "@/libs/firebase/types";
 import { Color } from "@/types/Color";
 import { getColorFromFirestore, updateColorInFirestore } from "@actions/firestore/colors";
 import { Spinner } from "@components/Spinner";
-import { ColorPicker } from "@components/led/ColorPicker";
+import { ColorPicker } from "@components/led/picker/ColorPicker";
 import { LedColorList } from "@components/led/LedColorList";
 import { useEffect, useState } from "react";
 
@@ -43,7 +43,7 @@ export const LedStaticInterface = () => {
     return (
         <div className="mx-5 flex flex-col items-center gap-6">
             <LedColorList activeColor={activeColor} />
-            <ColorPicker activeColor={activeColor.hex} onChange={onColorChange} />
+            <ColorPicker inputColor={activeColor.hex} onChange={onColorChange} />
         </div>
     );
 };
