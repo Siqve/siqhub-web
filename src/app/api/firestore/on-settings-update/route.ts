@@ -3,6 +3,9 @@ import { EVENT_STREAM_HEADERS } from "@/app/api/constants";
 import { createSettingsListener } from "@/libs/firebase/queries/createSettingsListener";
 import { Unsubscribe } from "@firebase/firestore";
 
+// Disables the pre-rendering of the page
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
     let unsubscribe: Unsubscribe;
     return new Response(
