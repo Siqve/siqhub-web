@@ -19,7 +19,7 @@ export const updateSettingsInFirestore = async (
     return setDoc(doc(db, GENERAL.ID, GENERAL.SETTINGS.ID), settingsDocument);
 };
 
-export const resetColorInFirestore = async (): Promise<void> => {
+export const resetActiveColorInFirestore = async (): Promise<void> => {
     const firstColor = await getFirstColorFromFirestore();
     return setDoc(doc(db, GENERAL.ID, GENERAL.SETTINGS.ID), {
         activeColorId: firstColor?.id ?? "undefined",
