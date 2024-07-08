@@ -1,10 +1,10 @@
-import { sendDataWithStreamController } from "@/app/api/apiUtils";
+import { sendDataWithStreamController } from "@/utils/apiUtils";
 import { EVENT_STREAM_HEADERS } from "@/app/api/constants";
 import { createColorsListener } from "@/libs/firebase/queries/createColorsListener";
 import { Unsubscribe } from "@firebase/firestore";
 
 // Disables the pre-rendering of the page
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
     let unsubscribe: Unsubscribe;

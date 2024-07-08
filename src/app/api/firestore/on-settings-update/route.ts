@@ -1,4 +1,4 @@
-import { sendDataWithStreamController } from "@/app/api/apiUtils";
+import { sendDataWithStreamController } from "@/utils/apiUtils";
 import { EVENT_STREAM_HEADERS } from "@/app/api/constants";
 import { createSettingsListener } from "@/libs/firebase/queries/createSettingsListener";
 import { Unsubscribe } from "@firebase/firestore";
