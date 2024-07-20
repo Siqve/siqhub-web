@@ -1,5 +1,5 @@
 import { Content } from "@/containers/Content";
-import { getDevice } from "@/managers/DeviceManager";
+import { getDevice } from "@/services/deviceService";
 import { LedStripController } from "@components/controllers/LedStripController";
 import { DeviceHeader } from "@components/device/DeviceHeader";
 import { redirect } from "next/navigation";
