@@ -12,7 +12,7 @@ const DevicePage = async ({ params }: { params: { id: string } }) => {
         <>
             <DeviceHeader device={device} />
             <Content>
-                <LedStripController />
+                <LedStripController device={device}/>
             </Content>
         </>
     );

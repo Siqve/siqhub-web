@@ -1,10 +1,12 @@
-import { Device } from "@/types/Device";
-import { getDeviceFromFirestore, getDevicesFromFirestore } from "@actions/firestore/devices";
+import { supabase } from "@/services/supabaseService";
+import { Device2 } from "@/types/Device";
 
-export const getDeviceList = async (): Promise<Device[]> => {
-    return getDevicesFromFirestore();
+const DEVICE_QUERY = "id, ip, name, type, color_theme(name, gradient_class, text_class)";
+
+export const getDeviceList = async (): Promise<Device2[]> => {
+    return supabase.getAllTableRows<Device2>("device", DEVICE_QUERY);
 };
 
-export const getDevice = async (deviceId: string): Promise<Device | undefined> => {
-    return getDeviceFromFirestore(deviceId);
+export const getDevice = async (deviceId: string): Promise<Device2 | undefined> => {
+    return supabase.getSingleTableRow<Device2>("device", DEVICE_QUERY, [{ column: "id", value: deviceId }]);
 };
