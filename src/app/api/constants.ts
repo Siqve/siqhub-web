@@ -5,8 +5,8 @@ export const EVENT_STREAM_HEADERS = {
 };
 
 export const API_ROUTE = {
-    FIRESTORE: {
-        ON_SETTINGS_UPDATE: "/api/firestore/on-settings-update",
-        ON_COLORS_UPDATE: "/api/firestore/on-colors-update",
-    },
+    SUPABASE: {
+        ON_DB_UPDATE: "/api/supabase/on-db-update",
+        ON_DB_ALL: "/api/supabase/on-db-all",
+    }
 } as const;

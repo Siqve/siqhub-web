@@ -37,7 +37,6 @@ export const HueSlider = ({
         },
     };
 
-    console.log(startValue);
     return (
         <div className="flex w-full items-center justify-between gap-2">
             {IconLeft && <IconLeft size={30} color={COLORS["base-content"]} />}

@@ -1,53 +1,48 @@
-import { API_ROUTE } from "@/app/api/constants";
-import { Color } from "@/types/Color";
-import { createColorInFirestore, deleteColorInFirestore } from "@actions/firestore/colors";
-import { resetActiveColorInFirestore, updateSettingsInFirestore } from "@actions/firestore/settings";
+import { LedStripMode } from "@/constants/ledStrip";
+import { useColorsListener } from "@/hooks/useColorsListener";
+import { ColorDB } from "@/libs/supabase/types";
+import { Device } from "@/types/Device";
+import { _deleteColor, _insertColor } from "@actions/supabase/color";
+import { _updateDeviceSettings } from "@actions/supabase/device";
+import { _resetActiveColor } from "@actions/supabase/device_led";
 import { IconColorList } from "@components/IconColorList";
-import { useEffect, useState } from "react";
 
 const INITIAL_COLOR = "FBFFFF";
 
-export type ColorListProps = {
-    activeColor: Color;
+export type LedColorListProps = {
+    device: Device;
+    activeColorId: number;
 };
 
-export const LedColorList = ({ activeColor }: ColorListProps) => {
-    const [colors, setColors] = useState<Color[]>([]);
+export const LedColorList = ({ device, activeColorId }: LedColorListProps) => {
+    const { colors } = useColorsListener();
 
-    const initColorsListener = () => {
-        const settingsEventSource = new EventSource(API_ROUTE.FIRESTORE.ON_COLORS_UPDATE);
-        settingsEventSource.onmessage = (event) => {
-            const colors: Color[] = JSON.parse(event.data);
-            setColors(colors);
-        };
-        return settingsEventSource;
+    const updateActiveColor = (colorId: number) => {
+        void _updateDeviceSettings(device.id, {
+            mode: LedStripMode.STATIC,
+            activeColorId: colorId,
+        });
     };
 
-    useEffect(() => {
-        const eventSource = initColorsListener();
-        return () => eventSource.close();
-    }, []);
-
-    const onColorSelect = (color: Color) => {
-        updateSettingsInFirestore({ activeColorId: color.id });
+    const onColorSelect = (color: ColorDB) => {
+        updateActiveColor(color.id);
     };
 
     const onCreateColorClick = () => {
-        createColorInFirestore(INITIAL_COLOR).then((newDocument) => {
-            const newColor: Color = { id: newDocument, hex: INITIAL_COLOR };
-            onColorSelect(newColor);
+        _insertColor({ hex: INITIAL_COLOR }).then((newColor) => {
+            updateActiveColor(newColor.id);
         });
     };
 
     const onDeleteColorClick = () => {
-        resetActiveColorInFirestore();
-        deleteColorInFirestore(activeColor.id);
+        void _deleteColor(activeColorId);
+        void _resetActiveColor(device);
     };
 
     return (
         <IconColorList
             colors={colors}
-            activeColor={activeColor}
+            activeColorId={activeColorId}
             onColorSelect={onColorSelect}
             onCreateColorClick={onCreateColorClick}
             onDeleteColorClick={onDeleteColorClick}

@@ -1,35 +1,18 @@
-"use client";
-import { API_ROUTE } from "@/app/api/constants";
-import { SettingsDocument } from "@/libs/firebase/types";
-import { Color } from "@/types/Color";
-import { getColorFromFirestore, updateColorInFirestore } from "@actions/firestore/colors";
-import { Spinner } from "@components/Spinner";
-import { ColorPicker } from "@components/led/picker/ColorPicker";
+import { useColorListener } from "@/hooks/useColorListener";
+import { Device } from "@/types/Device";
+import { LedStripSettings } from "@/types/Settings";
+import { _updateColor } from "@actions/supabase/color";
 import { LedColorList } from "@components/led/LedColorList";
-import { useEffect, useState } from "react";
+import { ColorPicker } from "@components/led/picker/ColorPicker";
+import { Spinner } from "@components/Spinner";
 
-export const LedStaticInterface = () => {
-    const [activeColor, setActiveColor] = useState<Color>();
+type LedStaticInterfaceProps = {
+    device: Device;
+    ledStripSettings: LedStripSettings;
+};
 
-    const initSettingsListener = () => {
-        const settingsEventSource = new EventSource(API_ROUTE.FIRESTORE.ON_SETTINGS_UPDATE);
-
-        settingsEventSource.onmessage = (event) => {
-            const settings: SettingsDocument = JSON.parse(event.data);
-
-            if (settings.activeColorId) {
-                getColorFromFirestore(settings.activeColorId).then((color) => {
-                    setActiveColor(color);
-                });
-            }
-        };
-        return settingsEventSource;
-    };
-
-    useEffect(() => {
-        const eventSource = initSettingsListener();
-        return () => eventSource.close();
-    }, []);
+export const LedStaticInterface = ({ device, ledStripSettings }: LedStaticInterfaceProps) => {
+    const { color: activeColor } = useColorListener(ledStripSettings.activeColorId.toString());
 
     if (!activeColor) {
         return <Spinner />;
@@ -37,13 +20,16 @@ export const LedStaticInterface = () => {
 
     const onColorChange = (color: string) => {
         if (activeColor.immutable) return;
-        updateColorInFirestore(activeColor.id, color);
+        void _updateColor(activeColor.id, { hex: color });
     };
 
     return (
         <div className="mx-5 flex flex-col items-center gap-6">
-            <LedColorList activeColor={activeColor} />
-            <ColorPicker inputColor={activeColor.hex} onChange={onColorChange} />
+            <LedColorList device={device} activeColorId={ledStripSettings.activeColorId} />
+            {!activeColor.immutable && (
+                // TODO Make an indication that the color is immutable
+                <ColorPicker inputColor={activeColor.hex} onChange={onColorChange} />
+            )}
         </div>
     );
 };
