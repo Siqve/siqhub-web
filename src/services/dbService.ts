@@ -7,7 +7,7 @@ import {
     DeviceUpdateDB, SortOrder
 } from "@/libs/supabase/types";
 import { supabase } from "@/services/supabaseService";
-import { Device2 } from "@/types/Device";
+import { Device } from "@/types/Device";
 
 const DEVICE_QUERY = `${DB_TABLES.DEVICE.ID}, ${DB_TABLES.DEVICE.IP}, ${DB_TABLES.DEVICE.NAME}, ${DB_TABLES.DEVICE.TYPE}, ${DB_TABLES.DEVICE.SETTINGS_JSON}, \
 ${DB_TABLES.DEVICE.COLOR_THEME}(${DB_TABLES.COLOR_THEME.NAME}, ${DB_TABLES.COLOR_THEME.GRADIENT_CLASS}, ${DB_TABLES.COLOR_THEME.TEXT_CLASS})`;
@@ -59,7 +59,7 @@ export const getDB = () => {
             _tableName = DB_TABLES.DEVICE.TABLE_NAME;
             _query = DEVICE_QUERY;
             _idColumn = DB_TABLES.DEVICE.ID;
-            return _modeFunctions<Device2, DeviceInsertDB, DeviceUpdateDB>();
+            return _modeFunctions<Device, DeviceInsertDB, DeviceUpdateDB>();
         },
     };
 };

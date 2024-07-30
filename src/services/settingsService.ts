@@ -1,10 +1,10 @@
 import { DeviceUpdateDB } from "@/libs/supabase/types";
 import { getDB } from "@/services/dbService";
-import { Device2 } from "@/types/Device";
+import { Device } from "@/types/Device";
 import { LedStripSettings } from "@/types/Settings";
 
 export const settingsService = {
-    update: async (deviceId: string, settings: string): Promise<Device2> => {
+    update: async (deviceId: string, settings: string): Promise<Device> => {
         const update: DeviceUpdateDB = {
             settings_json: settings,
         };
@@ -12,7 +12,7 @@ export const settingsService = {
         return getDB().device().update(deviceId, update);
     },
     ledStrip: {
-        resetActiveColor: async (device: Device2): Promise<Device2> => {
+        resetActiveColor: async (device: Device): Promise<Device> => {
             const colors = await getDB().color().getAll();
             if (colors.length === 0) {
                 throw new Error(
