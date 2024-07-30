@@ -1,13 +1,13 @@
 import { useDatabaseListener } from "@/hooks/useDatabaseListener";
 import { getEndpoints } from "@/services/endpointService";
-import { Device2 } from "@/types/Device";
+import { Device } from "@/types/Device";
 
 type UseDeviceListenerReturn = {
-    device: Device2;
+    device: Device;
 };
 
-export const useDeviceListener = (initialValue: Device2): UseDeviceListenerReturn => {
-    const { value: device } = useDatabaseListener<Device2>(
+export const useDeviceListener = (initialValue: Device): UseDeviceListenerReturn => {
+    const { value: device } = useDatabaseListener<Device>(
         initialValue,
         getEndpoints().device(initialValue.id).getUpdates(),
     );
