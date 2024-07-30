@@ -4,11 +4,12 @@ import { Children, ReactNode, useState } from "react";
 
 export type HueTabProps = {
     tabNames: string[];
+    startTabIndex?: number;
     children: ReactNode;
 };
 
-export const HueTab = ({ tabNames, children }: HueTabProps) => {
-    const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+export const HueTab = ({ tabNames, startTabIndex, children }: HueTabProps) => {
+    const [activeTabIndex, setActiveTabIndex] = useState<number>(startTabIndex ?? 0);
     if (tabNames.length === 0) return null;
     const childrenArray = Children.toArray(children);
 

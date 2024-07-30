@@ -1,32 +1,32 @@
 import { CardListSection } from "@/containers/CardListSection";
 import { CircleIcon } from "@/containers/CircleIcon";
+import { ColorDB } from "@/libs/supabase/types";
 import { COLORS } from "@/styles/colors";
-import { Color } from "@/types/Color";
 import { Check, Plus, XCircle } from "@phosphor-icons/react/dist/ssr";
 import tinycolor from "tinycolor2";
 
 export type ColorListProps = {
-    colors: Color[];
-    activeColor?: Color;
-    onColorSelect: (color: Color) => void;
+    colors: ColorDB[];
+    activeColorId?: number;
+    onColorSelect: (color: ColorDB) => void;
     onCreateColorClick?: () => void;
     onDeleteColorClick?: () => void;
 };
 
 export const IconColorList = ({
     colors,
-    activeColor,
+    activeColorId,
     onColorSelect,
     onCreateColorClick,
     onDeleteColorClick,
 }: ColorListProps) => {
-    const isDeleteButtonEnabled = (color: Color) =>
+    const isDeleteButtonEnabled = (color: ColorDB) =>
         onDeleteColorClick && colors.length > 1 && !color.immutable;
 
     return (
         <CardListSection title="Colors">
             {colors.map((color) =>
-                activeColor?.id == color.id ? (
+                activeColorId === color.id ? (
                     <div className="relative" key={color.id}>
                         <CircleIcon color={`#${color.hex}`} onClick={() => onColorSelect(color)}>
                             <Check
