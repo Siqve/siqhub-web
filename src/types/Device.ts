@@ -1,10 +1,11 @@
+import { ColorTheme } from "@/types/ColorTheme";
 import { DeviceType } from "@/types/DeviceType";
 
 export type Device = {
     id: string;
-    type: DeviceType;
     name: string;
     ip: string;
-    gradientClass: string;
-    textClass: string;
+    settings_json: string;
+    type: DeviceType;
+    color_theme: ColorTheme;
 };
