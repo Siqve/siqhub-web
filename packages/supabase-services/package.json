@@ -1,0 +1,16 @@
+{
+    "name": "@siqve/supabase-services",
+    "version": "0.1.0",
+    "type": "module",
+    "private": true,
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "dev": "tsc --watch",
+        "build": "tsc"
+    },
+    "dependencies": {
+        "@supabase/supabase-js": "^2.45.0"
+    }
+}

@@ -1,13 +1,7 @@
-import { DB_TABLES } from "@/libs/supabase/constants";
-import {
-    ColorDB,
-    ColorInsertDB,
-    ColorUpdateDB,
-    DeviceInsertDB,
-    DeviceUpdateDB, SortOrder
-} from "@/libs/supabase/types";
-import { supabase } from "@/services/supabaseService";
-import { Device } from "@/types/Device";
+import { DB_TABLES } from "../constants";
+import { ColorDB, ColorInsertDB, ColorUpdateDB, DeviceInsertDB, DeviceUpdateDB, SortOrder } from "../types/types";
+import { supabase } from "../supabase";
+import { Device } from "../types/Device";
 
 const DEVICE_QUERY = `${DB_TABLES.DEVICE.ID}, ${DB_TABLES.DEVICE.IP}, ${DB_TABLES.DEVICE.NAME}, ${DB_TABLES.DEVICE.TYPE}, ${DB_TABLES.DEVICE.SETTINGS_JSON}, \
 ${DB_TABLES.DEVICE.COLOR_THEME}(${DB_TABLES.COLOR_THEME.NAME}, ${DB_TABLES.COLOR_THEME.GRADIENT_CLASS}, ${DB_TABLES.COLOR_THEME.TEXT_CLASS})`;
