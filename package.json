@@ -21,7 +21,7 @@
         "packages/*"
     ],
     "dependencies": {
-        "@phosphor-icons/react": "2.1.6",
+        "@phosphor-icons/react": "2.1.7",
         "@siqve/supabase-services": "0.1.0",
         "@types/tinycolor2": "1.4.6",
         "clsx": "2.1.1",
