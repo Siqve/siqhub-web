@@ -4,10 +4,10 @@ import {
     RealtimePostgresChangesPayload,
 } from "@supabase/realtime-js";
 import { createRealtimeChannel } from "../services/createRealtimeChannel";
-import { getTableActions } from "../tableActions/getTableActions";
+import { getTableActions } from "../services/getTableActions";
 import { SortOrder } from "../types";
 
-export const tableActionFunctions = <T, T_INSERT, T_UPDATE>(
+export const actionFunctions = <T, T_INSERT, T_UPDATE>(
     tableName: string,
     column?: string,
     query?: string,
