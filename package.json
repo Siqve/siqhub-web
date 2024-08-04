@@ -16,13 +16,13 @@
         "check-types": "tsc --noEmit",
         "upload-old": "ssh root@192.168.0.30 \"rm -rf /www/iot-web-server\" && scp -r src/old root@192.168.0.30:/www/iot-web-server"
     },
-  "workspaces": [
-    ".",
-    "packages/*"
-  ],
+    "workspaces": [
+        ".",
+        "packages/*"
+    ],
     "dependencies": {
-        "@siqve/supabase-services": "0.1.0",
         "@phosphor-icons/react": "^2.1.6",
+        "@siqve/supabase-services": "0.1.0",
         "@types/tinycolor2": "^1.4.6",
         "clsx": "^2.1.1",
         "dotenv": "^16.4.5",
@@ -39,8 +39,9 @@
         "@types/react": "^18",
         "@types/react-dom": "^18",
         "autoprefixer": "^10.4.19",
-        "eslint": "^8",
+        "eslint": "^8.57.0",
         "eslint-config-next": "^14.2.4",
+        "eslint-config-turbo": "^2.0.11",
         "postcss": "^8",
         "prettier": "^3.3.2",
         "prettier-plugin-organize-imports": "^3.2.4",

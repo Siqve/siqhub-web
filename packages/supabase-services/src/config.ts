@@ -9,7 +9,7 @@ let supabase: SupabaseClient<any, "public", any>;
 
 export const getSupabaseClient = (): SupabaseClient<any, "public", any> => {
     if (!isConfigured) {
-        throw new Error("Supabase is not configured2");
+        throw new Error("Supabase is not configured");
     }
     if (!supabase) {
         supabase = createClient(supabaseUrl!, supabaseKey!);
