@@ -1,7 +1,6 @@
 "use server";
 
-import { ColorDB, ColorInsertDB, ColorUpdateDB } from "@/libs/supabase/types";
-import { getDB } from "@/services/dbService";
+import { ColorDB, ColorInsertDB, ColorUpdateDB, getDB } from "@siqve/supabase-services";
 
 export const _getColor = async (colorId: string): Promise<ColorDB | undefined> => {
     return getDB().color().get(colorId);

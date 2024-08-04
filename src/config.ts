@@ -1,5 +1,5 @@
-import { isSupabaseConfigured } from "@/libs/supabase/supabase";
+import { isSupabaseConfigured } from "@siqve/supabase-services";
 
 export const globalConfig = {
-    isSupabaseConfigured,
+    isSupabaseConfigured: isSupabaseConfigured(),
 };

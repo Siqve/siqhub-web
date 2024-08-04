@@ -1,8 +1,8 @@
-import { ColorDB } from "@/libs/supabase/types";
 import { getEndpoints } from "@/services/endpointService";
 import { createEventSource } from "@/utils/requestUtils";
 import { _getColor } from "@actions/supabase/color";
 import { useCallback, useEffect, useState } from "react";
+import { ColorDB } from "@siqve/supabase-services";
 
 type UseColorListenerReturn = {
     color: ColorDB | undefined;

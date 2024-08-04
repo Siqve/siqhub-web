@@ -1,5 +1,5 @@
 import { API_ROUTE } from "@/app/api/constants";
-import { DB_TABLES } from "@/libs/supabase/constants";
+import { DB_TABLES } from "@siqve/supabase-services";
 
 export const getEndpoints = () => {
     let _url: string;

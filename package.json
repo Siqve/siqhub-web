@@ -5,19 +5,24 @@
     "packageManager": "npm@18.18.2",
     "scripts": {
         "dev": "next dev",
+        "all": "turbo run dev",
         "build": "next build",
         "env:dev": "vercel env pull --environment=Development --yes .env",
         "env:prod": "vercel env pull --environment=Production --yes .env",
         "prettier:write": "npx prettier . --write",
         "prettier:check": "npx prettier . --check",
         "lint": "next lint",
-        "generate": "supabase gen types --lang typescript --project-id tomohvedloccysnvruuy > src/libs/supabase/generated/database.types.ts",
+        "generate": "supabase gen types --lang typescript --project-id tomohvedloccysnvruuy > packages/supabase-services/src/generated/database.types.ts",
         "check-types": "tsc --noEmit",
         "upload-old": "ssh root@192.168.0.30 \"rm -rf /www/iot-web-server\" && scp -r src/old root@192.168.0.30:/www/iot-web-server"
     },
+  "workspaces": [
+    ".",
+    "packages/*"
+  ],
     "dependencies": {
+        "@siqve/supabase-services": "0.1.0",
         "@phosphor-icons/react": "^2.1.6",
-        "@supabase/supabase-js": "^2.44.4",
         "@types/tinycolor2": "^1.4.6",
         "clsx": "^2.1.1",
         "dotenv": "^16.4.5",

@@ -1,7 +1,6 @@
 import { EVENT_STREAM_HEADERS } from "@/app/api/constants";
-import { getSupabaseClient } from "@/libs/supabase/supabase";
-import { supabase } from "@/services/supabaseService";
 import { sendDataWithStreamController } from "@/utils/apiUtils";
+import { getDB } from "@siqve/supabase-services";
 import { RealtimeChannel } from "@supabase/realtime-js";
 import { NextRequest } from "next/server";
 
@@ -12,7 +11,7 @@ export async function GET(request: NextRequest) {
     const tableName: string | null = request.nextUrl.searchParams.get("tableName");
     const columnName: string | null = request.nextUrl.searchParams.get("columnName");
     const rowValue: string | null = request.nextUrl.searchParams.get("rowValue");
-    if (!tableName) {
+    if (!tableName || !rowValue) {
         return;
     }
 
@@ -20,22 +19,21 @@ export async function GET(request: NextRequest) {
     return new Response(
         new ReadableStream({
             async start(controller) {
-                settingsRealtimeChannel = supabase.listener.onUpdate(
-                    tableName,
-                    (updatedRow) => {
+                settingsRealtimeChannel = getDB()
+                    .custom(tableName, columnName ?? undefined)
+                    .listen()
+                    .onUpdate((updatedRow) => {
                         sendDataWithStreamController(controller, updatedRow);
-                    },
-                    columnName && rowValue ? `${columnName}=eq.${rowValue}` : undefined,
-                );
+                    }, rowValue);
 
                 request.signal.addEventListener("abort", () => {
-                    getSupabaseClient().removeChannel(settingsRealtimeChannel);
+                    getDB().admin().removeListener(settingsRealtimeChannel);
                     controller.close();
                 });
             },
             async cancel() {
                 if (settingsRealtimeChannel) {
-                    await getSupabaseClient().removeChannel(settingsRealtimeChannel);
+                    getDB().admin().removeListener(settingsRealtimeChannel);
                 }
             },
         }),

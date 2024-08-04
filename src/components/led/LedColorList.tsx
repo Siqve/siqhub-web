@@ -1,11 +1,11 @@
 import { LedStripMode } from "@/constants/ledStrip";
 import { useColorsListener } from "@/hooks/useColorsListener";
-import { ColorDB } from "@/libs/supabase/types";
 import { Device } from "@/types/Device";
 import { _deleteColor, _insertColor } from "@actions/supabase/color";
 import { _updateDeviceSettings } from "@actions/supabase/device";
 import { _resetActiveColor } from "@actions/supabase/device_led";
 import { IconColorList } from "@components/IconColorList";
+import { ColorDB } from "@siqve/supabase-services";
 
 const INITIAL_COLOR = "FBFFFF";
 

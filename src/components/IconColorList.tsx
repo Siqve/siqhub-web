@@ -1,9 +1,9 @@
 import { CardListSection } from "@/containers/CardListSection";
 import { CircleIcon } from "@/containers/CircleIcon";
-import { ColorDB } from "@/libs/supabase/types";
 import { COLORS } from "@/styles/colors";
 import { Check, Plus, XCircle } from "@phosphor-icons/react/dist/ssr";
 import tinycolor from "tinycolor2";
+import { ColorDB } from "@siqve/supabase-services";
 
 export type ColorListProps = {
     colors: ColorDB[];
