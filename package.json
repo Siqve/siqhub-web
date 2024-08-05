@@ -5,7 +5,7 @@
     "packageManager": "npm@10.8.2",
     "scripts": {
         "dev": "next dev",
-        "all": "turbo run dev",
+        "d": "turbo run dev",
         "build": "next build",
         "env:dev": "vercel env pull --environment=Development --yes .env",
         "env:prod": "vercel env pull --environment=Production --yes .env",
