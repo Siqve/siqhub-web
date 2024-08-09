@@ -7,8 +7,8 @@ import {
     DeviceInsertDB,
     DeviceUpdateDB,
 } from "../types";
-import { adminFunctions } from "./adminFunctions";
-import { actionFunctions } from "./actionFunctions";
+import { adminFunctions } from "./functions/adminFunctions";
+import { actionFunctions } from "./functions/actionFunctions";
 
 const DEVICE_QUERY = `${DB_TABLES.DEVICE.ID}, ${DB_TABLES.DEVICE.IP}, ${DB_TABLES.DEVICE.NAME}, ${DB_TABLES.DEVICE.TYPE}, ${DB_TABLES.DEVICE.SETTINGS_JSON}, \
 ${DB_TABLES.DEVICE.COLOR_THEME}(${DB_TABLES.COLOR_THEME.NAME}, ${DB_TABLES.COLOR_THEME.GRADIENT_CLASS}, ${DB_TABLES.COLOR_THEME.TEXT_CLASS})`;

@@ -3,9 +3,9 @@ import {
     RealtimeChannel,
     RealtimePostgresChangesPayload,
 } from "@supabase/realtime-js";
-import { createRealtimeChannel } from "../services/createRealtimeChannel";
-import { getTableActions } from "../services/getTableActions";
-import { SortOrder } from "../types";
+import { createRealtimeChannel } from "../../services/createRealtimeChannel";
+import { supabaseTableActions } from "../../services/supabaseTableActions";
+import { SortOrder } from "../../types";
 
 export const actionFunctions = <T, T_INSERT, T_UPDATE>(
     tableName: string,
@@ -14,10 +14,10 @@ export const actionFunctions = <T, T_INSERT, T_UPDATE>(
 ) => {
     return {
         getAll: async (order?: SortOrder): Promise<T[]> => {
-            return getTableActions().get().allTableRows<T>(tableName, query, order);
+            return supabaseTableActions().get().allTableRows<T>(tableName, query, order);
         },
         get: async (id: string): Promise<T | undefined> => {
-            return getTableActions()
+            return supabaseTableActions()
                 .get()
                 .singleTableRow<T>(
                     tableName,
@@ -26,7 +26,7 @@ export const actionFunctions = <T, T_INSERT, T_UPDATE>(
                 );
         },
         insert: async (row: T_INSERT): Promise<T> => {
-            return getTableActions()
+            return supabaseTableActions()
                 .insert<T>(tableName, [row])
                 .then((data) => data[0]);
         },
@@ -34,7 +34,7 @@ export const actionFunctions = <T, T_INSERT, T_UPDATE>(
             if (!column) {
                 throw new Error("Column must be defined in order to update row");
             }
-            return getTableActions()
+            return supabaseTableActions()
                 .update<T>(tableName, { column: column, value: rowId }, rowUpdate)
                 .then((data) => data[0]);
         },
@@ -42,7 +42,7 @@ export const actionFunctions = <T, T_INSERT, T_UPDATE>(
             if (!column) {
                 throw new Error("Column must be defined in order to update row");
             }
-            return getTableActions()
+            return supabaseTableActions()
                 .delete<T>(tableName, {
                     column: column,
                     value: rowId,

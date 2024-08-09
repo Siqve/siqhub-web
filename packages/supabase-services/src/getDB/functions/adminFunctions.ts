@@ -1,5 +1,5 @@
 import { RealtimeChannel } from "@supabase/realtime-js";
-import { getSupabaseClient } from "../config";
+import { getSupabaseClient } from "../../config";
 
 export const adminFunctions = () => {
     return {

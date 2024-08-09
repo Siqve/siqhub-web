@@ -6,7 +6,7 @@ type eq = {
     value: string | number;
 };
 
-export const getTableActions = () => ({
+export const supabaseTableActions = () => ({
     get: () => getActions(),
     insert: async <T>(tableName: string, row: any[]): Promise<T[]> => {
         const { data, error } = await getSupabaseClient()
