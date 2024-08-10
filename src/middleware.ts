@@ -10,15 +10,16 @@ export async function middleware(request: NextRequest) {
 
     const { user, supabaseResponse } = await supabaseService.admin().middlewareCheck(request);
 
-    if (
-        !user &&
-        !request.nextUrl.pathname.startsWith("/login") &&
-        !request.nextUrl.pathname.startsWith("/auth")
-    ) {
-        // no user, potentially respond by redirecting the user to the login page
-        const url = request.nextUrl.clone();
-        url.pathname = "/login";
-        return NextResponse.redirect(url);
+    if (!user) {
+        if (!request.nextUrl.pathname.startsWith("/login")) {
+            const pathName = request.nextUrl.pathname;
+
+            return NextResponse.redirect(new URL("/login?path=" + btoa(pathName), request.url));
+        }
+        return supabaseResponse;
+    }
+    if (request.nextUrl.pathname.startsWith("/login")) {
+        return NextResponse.redirect(new URL("/", request.url));
     }
 
     // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're

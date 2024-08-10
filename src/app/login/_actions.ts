@@ -1,24 +1,28 @@
 "use server";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { supabaseService } from "@siqve/supabase-services";
+import { redirect } from "next/navigation";
 
 const SIQHUE_PASSWORD = process.env.SIQHUE_WEB_APP_PASSWORD ?? "123";
 
 export async function _login(formData: FormData) {
     const password = formData.get("password") as string | null;
+    const path = formData.get("path") as string | null;
+
     if (!password) {
-        redirect("/login");
+        redirect(`/login${path ? `&path=${path}` : ""}`);
     }
     if (password !== SIQHUE_PASSWORD) {
-        redirect("/login?error=0");
+        errorRedirect(0, path);
     }
 
     const { error } = await supabaseService.admin().login();
     if (error) {
-        redirect("/login?error=1");
+        errorRedirect(1, path);
     }
 
-    revalidatePath("/", "layout");
-    redirect("/");
+    redirect(path ? atob(path) : "/");
+}
+
+function errorRedirect(errorCode: number, path: string | null) {
+    redirect(`/login?error=${errorCode}${path ? `&path=${path}` : ""}`);
 }
