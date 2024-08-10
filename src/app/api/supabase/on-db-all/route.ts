@@ -1,8 +1,8 @@
 import { EVENT_STREAM_HEADERS } from "@/app/api/constants";
 import { sendDataWithStreamController } from "@/utils/apiUtils";
-import { getDB } from "@siqve/supabase-services";
 import { RealtimeChannel } from "@supabase/realtime-js";
 import { NextRequest } from "next/server";
+import { db } from "@/services/dbService";
 
 // Disables the pre-rendering of the page
 export const dynamic = "force-dynamic";
@@ -19,7 +19,8 @@ export async function GET(request: NextRequest) {
     return new Response(
         new ReadableStream({
             async start(controller) {
-                settingsRealtimeChannel = getDB()
+                settingsRealtimeChannel = db
+                    .table()
                     .custom(tableName, columnName ?? undefined)
                     .listen()
                     .onAll((updatedRow) => {
@@ -27,13 +28,13 @@ export async function GET(request: NextRequest) {
                     }, rowValue ?? undefined);
 
                 request.signal.addEventListener("abort", () => {
-                    getDB().admin().removeListener(settingsRealtimeChannel);
+                    db.removeListener(settingsRealtimeChannel);
                     controller.close();
                 });
             },
             async cancel() {
                 if (settingsRealtimeChannel) {
-                    getDB().admin().removeListener(settingsRealtimeChannel);
+                    db.removeListener(settingsRealtimeChannel);
                 }
             },
         }),

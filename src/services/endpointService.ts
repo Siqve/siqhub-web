@@ -1,5 +1,5 @@
 import { API_ROUTE } from "@/app/api/constants";
-import { DB_TABLES } from "@siqve/supabase-services";
+import { DB_TABLES } from "@/constants/database";
 
 export const getEndpoints = () => {
     let _url: string;
@@ -10,7 +10,7 @@ export const getEndpoints = () => {
     const _getURL = () => {
         return (
             `${_url}?tableName=${_tableName}` +
-            (_columnId && _rowValue ? `&columnId=${_columnId}&rowValue=${_rowValue}` : "")
+            (_columnId && _rowValue ? `&columnName=${_columnId}&rowValue=${_rowValue}` : "")
         );
     };
 

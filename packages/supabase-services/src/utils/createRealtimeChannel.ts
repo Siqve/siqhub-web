@@ -1,4 +1,4 @@
-import { getSupabaseClient } from "../config";
+import { getSupabaseClient } from "../supabase";
 import { REALTIME_POSTGRES_CHANGES_LISTEN_EVENT } from "@supabase/realtime-js";
 import { REALTIME_LISTEN_TYPES } from "@supabase/supabase-js";
 

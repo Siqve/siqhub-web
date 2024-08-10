@@ -1,9 +1,9 @@
 import { CardListSection } from "@/containers/CardListSection";
 import { DeviceIcon } from "@components/DeviceIcon";
-import { getDB } from "@siqve/supabase-services";
+import { db } from "@/services/dbService";
 
 export const DeviceList = async () => {
-    const devices = await getDB().device().getAll();
+    const devices = await db.table().device().getAll();
 
     return (
         <div className="m-5">

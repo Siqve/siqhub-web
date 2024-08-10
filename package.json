@@ -23,6 +23,7 @@
     "dependencies": {
         "@phosphor-icons/react": "2.1.7",
         "@siqve/supabase-services": "0.1.0",
+        "@supabase/ssr": "^0.4.0",
         "@types/tinycolor2": "1.4.6",
         "clsx": "2.1.1",
         "dotenv": "16.4.5",
@@ -41,7 +42,6 @@
         "autoprefixer": "10.4.20",
         "eslint": "8.57.0",
         "eslint-config-next": "14.2.5",
-        "eslint-config-turbo": "2.0.12",
         "postcss": "8.4.41",
         "prettier": "3.3.3",
         "prettier-plugin-organize-imports": "3.2.4",

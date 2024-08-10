@@ -1,6 +1,7 @@
 import { Device } from "@/types/Device";
 import { LedStripSettings } from "@/types/Settings";
-import { DeviceUpdateDB, getDB } from "@siqve/supabase-services";
+import { DeviceUpdateDB } from "@siqve/supabase-services";
+import { db } from "@/services/dbService";
 
 export const settingsService = {
     update: async (deviceId: string, settings: string): Promise<Device> => {
@@ -8,11 +9,11 @@ export const settingsService = {
             settings_json: settings,
         };
 
-        return getDB().device().update(deviceId, update);
+        return db.table().device().update(deviceId, update);
     },
     ledStrip: {
         resetActiveColor: async (device: Device): Promise<Device> => {
-            const colors = await getDB().color().getAll();
+            const colors = await db.table().color().getAll();
             if (colors.length === 0) {
                 throw new Error(
                     `Unable to reset active color for device: ${device.id}. Reason: No colors found.`,
