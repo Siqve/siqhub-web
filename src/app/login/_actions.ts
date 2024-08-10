@@ -7,8 +7,6 @@ const SIQHUE_PASSWORD = process.env.SIQHUE_WEB_APP_PASSWORD ?? "123";
 
 export async function _login(formData: FormData) {
     const password = formData.get("password") as string | null;
-    console.log("password", password)
-
     if (!password) {
         redirect("/login");
     }
