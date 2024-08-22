@@ -88,7 +88,7 @@ const config: Config = {
                 ...customer_colors,
                 ...dracula,
                 background: {
-                    main: customer_colors.c_gray["700"],
+                    main: dracula["base-200"],
                 },
                 text: {
                     main: dracula["base-content"],
