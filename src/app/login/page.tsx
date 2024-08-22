@@ -21,7 +21,15 @@ const Login = () => {
             <div className="mx-auto flex h-screen w-fit flex-col justify-center">
                 <CardListSection title="Login">
                     <form className="flex flex-col items-center gap-3">
-                        {path && <input hidden={true} id="path" name="path" value={path} />}
+                        {path && (
+                            <input
+                                readOnly={true}
+                                hidden={true}
+                                id="path"
+                                name="path"
+                                value={path}
+                            />
+                        )}
                         <input
                             id="password"
                             type="password"
