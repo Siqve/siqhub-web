@@ -16,7 +16,7 @@ type eq = {
 
 export const supabaseService = {
     table: () => ({
-        get: () => getActions(),
+        select: () => selectActions(),
         insert: async <T>(tableName: string, row: any[]): Promise<T[]> => {
             const { data, error } = await getSupabaseClient()
                 .from(tableName)
@@ -108,45 +108,49 @@ export const supabaseService = {
     }),
 };
 
-function getActions() {
-    return {
-        tableRows: async <T>(
+function selectActions() {
+
+    const executeSelect = async <T>(
             tableName: string,
             selectQuery?: string,
             eq?: eq[],
             order?: SortOrder,
         ): Promise<T[]> => {
-            let queryBuilder = getSupabaseClient().from(tableName).select(selectQuery);
+        let queryBuilder = getSupabaseClient().from(tableName).select(selectQuery);
 
             eq?.forEach((condition) => {
                 queryBuilder = queryBuilder.eq(condition.column, condition.value);
             });
 
             if (order) {
+                // TODO Make column name dynamic (from eq firstval, default to id)
                 queryBuilder = queryBuilder.order("id", { ascending: order === "asc" });
             }
 
             const { data, error } = await queryBuilder.returns<T[]>();
             if (!data) {
-                throw new Error(`Error getting table rows. Table name: ${tableName}, \
-            selectQuery: ${selectQuery}, eq: ${JSON.stringify(eq)}. Error: ${error?.message}`);
+                throw new Error(
+                    `Error getting table rows. Table name: ${tableName}, selectQuery: ${selectQuery}, eq: ${JSON.stringify(eq)}. Error: ${error?.message}`,
+                );
             }
 
             return data;
-        },
+    }
+
+    return {
         allTableRows: async <T>(
             tableName: string,
             selectQuery?: string,
             order?: SortOrder,
         ): Promise<T[]> => {
-            return getActions().tableRows<T>(tableName, selectQuery, undefined, order);
+            return executeSelect<T>(tableName, selectQuery, undefined, order);
         },
         singleTableRow: async <T>(
             tableName: string,
             selectQuery?: string,
             eq?: eq[],
         ): Promise<T | undefined> => {
-            const data = await getActions().tableRows<T>(tableName, selectQuery, eq);
+            const data = await executeSelect<T>(tableName, selectQuery, eq);
             return data[0];
         },
     };

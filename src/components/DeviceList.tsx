@@ -3,7 +3,7 @@ import { DeviceIcon } from "@components/DeviceIcon";
 import { db } from "@/services/dbService";
 
 export const DeviceList = async () => {
-    const devices = await db.table().device().getAll();
+    const devices = await db.table().device().selectAll();
 
     return (
         <div className="m-5">

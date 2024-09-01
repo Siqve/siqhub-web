@@ -43,13 +43,13 @@ export const db = {
 
 function tableActions<T, T_INSERT, T_UPDATE>(tableName: string, column?: string, query?: string) {
     return {
-        getAll: async (order?: SortOrder): Promise<T[]> => {
-            return supabaseService.table().get().allTableRows<T>(tableName, query, order);
+        selectAll: async (order?: SortOrder): Promise<T[]> => {
+            return supabaseService.table().select().allTableRows<T>(tableName, query, order);
         },
-        get: async (id: string): Promise<T | undefined> => {
+        select: async (id: string): Promise<T | undefined> => {
             return supabaseService
                 .table()
-                .get()
+                .select()
                 .singleTableRow<T>(
                     tableName,
                     query,

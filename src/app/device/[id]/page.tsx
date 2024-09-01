@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/services/dbService";
 
 const DevicePage = async ({ params }: { params: { id: string } }) => {
-    const device = await db.table().device().get(params.id);
+    const device = await db.table().device().select(params.id);
     if (!device) redirect("/");
 
     return (

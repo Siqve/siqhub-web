@@ -4,11 +4,11 @@ import { ColorDB, ColorInsertDB, ColorUpdateDB } from "@siqve/supabase-services"
 import { db } from "@/services/dbService";
 
 export const _getColor = async (colorId: string): Promise<ColorDB | undefined> => {
-    return db.table().color().get(colorId);
+    return db.table().color().select(colorId);
 };
 
 export const _getColors = async (): Promise<ColorDB[] | undefined> => {
-    return db.table().color().getAll("asc");
+    return db.table().color().selectAll("asc");
 };
 
 export const _insertColor = async (colorInsert: ColorInsertDB): Promise<ColorDB> => {
