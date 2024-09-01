@@ -6,8 +6,8 @@ import {
 import { AuthTokenResponsePassword } from "@supabase/supabase-js";
 import { NextRequest } from "next/server";
 import { getSupabaseClient, middlewareCheck, SUPABASE_ENVS } from "../supabase";
-import { SortOrder } from "../types";
 import { createRealtimeChannel } from "../utils/createRealtimeChannel";
+import { SortOrder } from "../types";
 
 type eq = {
     column: string;
@@ -109,41 +109,39 @@ export const supabaseService = {
 };
 
 function selectActions() {
-
     const executeSelect = async <T>(
-            tableName: string,
-            selectQuery?: string,
-            eq?: eq[],
-            order?: SortOrder,
-        ): Promise<T[]> => {
+        tableName: string,
+        selectQuery?: string,
+        eq?: eq[],
+        sort?: SortOrder,
+    ): Promise<T[]> => {
         let queryBuilder = getSupabaseClient().from(tableName).select(selectQuery);
 
-            eq?.forEach((condition) => {
-                queryBuilder = queryBuilder.eq(condition.column, condition.value);
-            });
+        eq?.forEach((condition) => {
+            queryBuilder = queryBuilder.eq(condition.column, condition.value);
+        });
 
-            if (order) {
-                // TODO Make column name dynamic (from eq firstval, default to id)
-                queryBuilder = queryBuilder.order("id", { ascending: order === "asc" });
-            }
+        if (sort) {
+            queryBuilder = queryBuilder.order(sort.column, { ascending: sort.order === "asc" });
+        }
 
-            const { data, error } = await queryBuilder.returns<T[]>();
-            if (!data) {
-                throw new Error(
-                    `Error getting table rows. Table name: ${tableName}, selectQuery: ${selectQuery}, eq: ${JSON.stringify(eq)}. Error: ${error?.message}`,
-                );
-            }
+        const { data, error } = await queryBuilder.returns<T[]>();
+        if (!data) {
+            throw new Error(
+                `Error getting table rows. Table name: ${tableName}, selectQuery: ${selectQuery}, eq: ${JSON.stringify(eq)}. Error: ${error?.message}`,
+            );
+        }
 
-            return data;
-    }
+        return data;
+    };
 
     return {
         allTableRows: async <T>(
             tableName: string,
             selectQuery?: string,
-            order?: SortOrder,
+            sort?: SortOrder,
         ): Promise<T[]> => {
-            return executeSelect<T>(tableName, selectQuery, undefined, order);
+            return executeSelect<T>(tableName, selectQuery, undefined, sort);
         },
         singleTableRow: async <T>(
             tableName: string,

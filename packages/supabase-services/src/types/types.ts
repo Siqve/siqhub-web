@@ -12,4 +12,7 @@ export type ColorUpdateDB = TablesUpdate<"color">
 
 export type ColorThemeDB = Tables<"color_theme">
 
-export type SortOrder = "asc" | "desc";
+export type SortOrder = {
+    column: string;
+    order: "asc" | "desc";
+}

@@ -8,7 +8,7 @@ export const _getColor = async (colorId: string): Promise<ColorDB | undefined> =
 };
 
 export const _getColors = async (): Promise<ColorDB[] | undefined> => {
-    return db.table().color().selectAll("asc");
+    return db.table().color().selectAll({column: "id", order: "asc" });
 };
 
 export const _insertColor = async (colorInsert: ColorInsertDB): Promise<ColorDB> => {
