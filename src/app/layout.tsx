@@ -10,8 +10,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-    title: "SiqHue",
-    description: "An LED Strip controller",
+    title: "SiqHub",
+    description: "A smart hub for your smart home",
 };
 
 const RootLayout = ({

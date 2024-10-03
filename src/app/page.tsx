@@ -5,7 +5,7 @@ import { HomeHeader } from "@components/home/HomeHeader";
 const Home = () => {
     return (
         <>
-            <HomeHeader headerText="SiqHue" />
+            <HomeHeader headerText="SiqHub" />
             <Content>
                 <DeviceList />
             </Content>
