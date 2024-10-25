@@ -1,4 +1,4 @@
-import { useColorListener } from "@/hooks/useColorListener";
+import { HookStatus, useColorListener } from "@/hooks/useColorListener";
 import { Device } from "@/types/Device";
 import { LedStripSettings } from "@/types/Settings";
 import { _updateColor } from "@actions/supabase/color";
@@ -12,21 +12,21 @@ type LedStaticInterfaceProps = {
 };
 
 export const LedStaticInterface = ({ device, ledStripSettings }: LedStaticInterfaceProps) => {
-    const { color: activeColor } = useColorListener(ledStripSettings.activeColorId.toString());
+    const { color: activeColor, hookStatus } = useColorListener(ledStripSettings.activeColorId.toString());
 
-    if (!activeColor) {
+    if (hookStatus !== HookStatus.READY) {
         return <Spinner />;
     }
 
     const onColorChange = (color: string) => {
-        if (activeColor.immutable) return;
+        if (!activeColor || activeColor.immutable) return;
         void _updateColor(activeColor.id, { hex: color });
     };
 
     return (
         <div className="mx-5 flex flex-col items-center gap-6">
             <LedColorList device={device} activeColorId={ledStripSettings.activeColorId} />
-            {!activeColor.immutable && (
+            {activeColor && !activeColor.immutable && (
                 // TODO Make an indication that the color is immutable
                 <ColorPicker inputColor={activeColor.hex} onChange={onColorChange} />
             )}
