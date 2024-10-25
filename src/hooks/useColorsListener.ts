@@ -27,6 +27,11 @@ export const useColorsListener = (): UseColorListenerReturn => {
     useEffect(() => {
         getAndUpdateColors();
         const eventSource = initializeListener();
+        eventSource.onerror = () => {
+            console.log("Error occured");
+            eventSource.close();
+            initializeListener();
+        }
 
         return () => eventSource.close();
     }, [getAndUpdateColors, initializeListener]);

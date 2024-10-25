@@ -7,6 +7,8 @@ import { getSupabaseClient } from "@siqve/supabase-services/dist/supabase";
 
 // Disables the pre-rendering of the page
 export const dynamic = "force-dynamic";
+export const maxDuration = 60; // This function can run for a maximum of 5 seconds
+
 
 export async function GET(request: NextRequest) {
     const tableName: string | null = request.nextUrl.searchParams.get("tableName");
