@@ -26,7 +26,7 @@ export const HueSlider = ({
     };
 
     const sliderStyle: SliderStyles = {
-        track: { backgroundColor: `#${activeBarColor}` ?? COLORS["base-content"] },
+        track: { backgroundColor: activeBarColor ? `#${activeBarColor}` : COLORS["base-content"] },
         handle: {
             backgroundColor: COLORS["base-content"],
             border: `none`,
