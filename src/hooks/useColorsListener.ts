@@ -10,6 +10,7 @@ type UseColorListenerReturn = {
 
 export const useColorsListener = (): UseColorListenerReturn => {
     const [colors, setColors] = useState<ColorDB[]>([]);
+    const [reconnectCounter, setReconnectCounter] = useState<number>(0);
 
     const getAndUpdateColors = useCallback(() => {
         _getColors().then((colors) => {
@@ -19,22 +20,25 @@ export const useColorsListener = (): UseColorListenerReturn => {
     }, []);
 
     const initializeListener = useCallback(() => {
-        return createEventSource(getEndpoints().color().getAll(), () => {
-            getAndUpdateColors();
-        });
+        const eventSource = createEventSource(getEndpoints().color().getAll(), getAndUpdateColors);
+
+        eventSource.onerror = () => {
+            setReconnectCounter((prev) => prev + 1);
+        };
+
+        return eventSource;
+
     }, [getAndUpdateColors]);
 
     useEffect(() => {
         getAndUpdateColors();
+    }, [getAndUpdateColors]);
+
+    useEffect(() => {
         const eventSource = initializeListener();
-        eventSource.onerror = () => {
-            console.log("Error occured");
-            eventSource.close();
-            initializeListener();
-        }
 
         return () => eventSource.close();
-    }, [getAndUpdateColors, initializeListener]);
+    }, [initializeListener, reconnectCounter]);
 
     return { colors };
 };
