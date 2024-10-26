@@ -1,8 +1,8 @@
 import { getEndpoints } from "@/services/endpointService";
 import { createEventSource } from "@/utils/requestUtils";
 import { _getColors } from "@actions/supabase/color";
-import { useCallback, useEffect, useState } from "react";
 import { ColorDB } from "@siqve/supabase-services";
+import { useCallback, useEffect, useState } from "react";
 
 type UseColorListenerReturn = {
     colors: ColorDB[];
@@ -27,18 +27,19 @@ export const useColorsListener = (): UseColorListenerReturn => {
         };
 
         return eventSource;
-
     }, [getAndUpdateColors]);
 
-    useEffect(() => {
-        getAndUpdateColors();
-    }, [getAndUpdateColors]);
-
+    // Initialize the listener
     useEffect(() => {
         const eventSource = initializeListener();
 
         return () => eventSource.close();
     }, [initializeListener, reconnectCounter]);
+
+    // Get the initial colors
+    useEffect(() => {
+        getAndUpdateColors();
+    }, [getAndUpdateColors]);
 
     return { colors };
 };

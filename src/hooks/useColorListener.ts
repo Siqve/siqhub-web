@@ -1,8 +1,8 @@
 import { getEndpoints } from "@/services/endpointService";
 import { createEventSource } from "@/utils/requestUtils";
 import { _getColor } from "@actions/supabase/color";
-import { useCallback, useEffect, useState } from "react";
 import { ColorDB } from "@siqve/supabase-services";
+import { useCallback, useEffect, useState } from "react";
 
 type UseColorListenerReturn = {
     hookStatus: HookStatus;
@@ -17,27 +17,36 @@ export enum HookStatus {
 export const useColorListener = (colorId: string): UseColorListenerReturn => {
     const [color, setColor] = useState<ColorDB>();
     const [hookStatus, setHookStatus] = useState<HookStatus>(HookStatus.NOT_READY);
+    const [reconnectCounter, setReconnectCounter] = useState<number>(0);
+
+    const updateColor = (color: ColorDB | undefined) => {
+        setColor(color);
+        setHookStatus(HookStatus.READY);
+    };
 
     const initializeListener = useCallback(() => {
-        return createEventSource(
+        const eventSource = createEventSource(
             getEndpoints().color(colorId).getUpdates(),
-            (event: MessageEvent<any>) => {
-                setColor(JSON.parse(event.data));
-                setHookStatus(HookStatus.READY);
-            },
+            (event: MessageEvent<any>) => updateColor(JSON.parse(event.data)),
         );
+
+        eventSource.onerror = () => {
+            setReconnectCounter((prev) => prev + 1);
+        };
+        return eventSource;
     }, [colorId]);
 
+    // Initialize the listener
     useEffect(() => {
-        _getColor(colorId).then((initialValue) => {
-            setColor(initialValue);
-            setHookStatus(HookStatus.READY);
-        });
-
         const eventSource = initializeListener();
 
         return () => eventSource.close();
-    }, [colorId, initializeListener]);
+    }, [initializeListener, reconnectCounter]);
+
+    // Get the initial color
+    useEffect(() => {
+        _getColor(colorId).then(updateColor);
+    }, [colorId]);
 
     return { color, hookStatus };
 };
