@@ -4,11 +4,11 @@ export const getURLOrigin = (): string => window.location.origin;
 
 export const createEventSource = (
     url: string,
-    callback: (event: MessageEvent<any>) => void,
+    callback: (object: any) => void,
 ): EventSource => {
     if (isServer()) throw new Error("EventSource is not supported on server side.");
 
     const eventSource = new EventSource(url);
-    eventSource.onmessage = callback;
+    eventSource.onmessage = (event) => callback(JSON.parse(event.data));
     return eventSource;
 };

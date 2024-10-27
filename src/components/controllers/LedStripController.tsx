@@ -12,10 +12,14 @@ type LedStripControllerProps = {
 };
 
 export const LedStripController = ({ initialDevice }: LedStripControllerProps) => {
-    const { device } = useDeviceListener(initialDevice);
+    const { device, isDeviceReady } = useDeviceListener(initialDevice);
+
+    if (!isDeviceReady) {
+        return <Spinner />;
+    }
 
     if (!device) {
-        return <Spinner />;
+        return <h2>Error, failed to load device!</h2>;
     }
 
     const ledStripSettings: LedStripSettings = JSON.parse(device.settings_json);

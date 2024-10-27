@@ -2,14 +2,15 @@ import { useDatabaseListener } from "@/hooks/useDatabaseListener";
 import { getEndpoints } from "@/services/endpointService";
 import { Device } from "@/types/Device";
 
-type UseDeviceListenerReturn = {
-    device: Device;
+type DeviceListenerReturn = {
+    device: Device | undefined;
+    isDeviceReady: boolean;
 };
 
-export const useDeviceListener = (initialValue: Device): UseDeviceListenerReturn => {
-    const { value: device } = useDatabaseListener<Device>(
+export const useDeviceListener = (initialValue: Device): DeviceListenerReturn => {
+    const { value: device, isReady: isDeviceReady } = useDatabaseListener<Device>(
         initialValue,
         getEndpoints().device(initialValue.id).getUpdates(),
     );
-    return { device };
+    return { device, isDeviceReady };
 };

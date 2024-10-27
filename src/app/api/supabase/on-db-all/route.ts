@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     if (!tableName) {
         return;
     }
-    // TODO Continune with getDB and get this to work
+
     let settingsRealtimeChannel: RealtimeChannel;
     return new Response(
         new ReadableStream({

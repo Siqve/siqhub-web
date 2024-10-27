@@ -1,4 +1,4 @@
-import { HookStatus, useColorListener } from "@/hooks/useColorListener";
+import { useColorListener } from "@/hooks/useColorListener";
 import { Device } from "@/types/Device";
 import { LedStripSettings } from "@/types/Settings";
 import { _updateColor } from "@actions/supabase/color";
@@ -12,9 +12,11 @@ type LedStaticInterfaceProps = {
 };
 
 export const LedStaticInterface = ({ device, ledStripSettings }: LedStaticInterfaceProps) => {
-    const { color: activeColor, hookStatus } = useColorListener(ledStripSettings.activeColorId.toString());
+    const { color: activeColor, isColorReady } = useColorListener(
+        ledStripSettings.activeColorId.toString(),
+    );
 
-    if (hookStatus !== HookStatus.READY) {
+    if (!isColorReady) {
         return <Spinner />;
     }
 
