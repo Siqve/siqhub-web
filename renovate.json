@@ -17,12 +17,10 @@
     },
     {
       "matchUpdateTypes": ["minor"],
-      "automerge": true,
       "addLabels": ["minor"]
     },
     {
       "matchUpdateTypes": ["patch"],
-      "automerge": true,
       "addLabels": ["patch"]
     }
   ]
