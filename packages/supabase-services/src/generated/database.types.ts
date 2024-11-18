@@ -27,6 +27,24 @@ export type Database = {
         }
         Relationships: []
       }
+      color_profile: {
+        Row: {
+          hexes: string
+          id: number
+          immutable: boolean
+        }
+        Insert: {
+          hexes: string
+          id?: number
+          immutable?: boolean
+        }
+        Update: {
+          hexes?: string
+          id?: number
+          immutable?: boolean
+        }
+        Relationships: []
+      }
       color_theme: {
         Row: {
           gradient_class: string | null
@@ -195,4 +213,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+    ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
