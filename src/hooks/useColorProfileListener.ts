@@ -1,5 +1,5 @@
 import { useDatabaseListenerWithInitialFetch } from "@/hooks/useDatabaseListener";
-import { getEndpoints } from "@/services/endpointService";
+import { endpointBuilder } from "@/utils/endpointBuilder";
 import { _getColor } from "@actions/supabase/color";
 import { ColorProfileDB } from "@siqve/supabase-services";
 import { useCallback } from "react";
@@ -14,7 +14,7 @@ export const useColorProfileListener = (colorId: string): ColorListenerReturn =>
 
     const { value: colorProfile, isReady: isColorProfileReady } = useDatabaseListenerWithInitialFetch<ColorProfileDB>(
         getColor,
-        getEndpoints().colorProfile(colorId).getUpdates(),
+        endpointBuilder().colorProfile(colorId).updates(),
     );
 
     return { colorProfile, isColorProfileReady };

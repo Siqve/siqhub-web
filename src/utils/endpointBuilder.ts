@@ -1,7 +1,7 @@
 import { API_ROUTE } from "@/app/api/constants";
 import { DB_TABLES } from "@/constants/database";
 
-export const getEndpoints = () => {
+export const endpointBuilder = () => {
     let _url: string;
     let _tableName: string;
     let _columnId: string;
@@ -19,7 +19,7 @@ export const getEndpoints = () => {
             _url = API_ROUTE.SUPABASE.ON_DB_ALL;
             return _getURL();
         },
-        getUpdates() {
+        updates() {
             _url = API_ROUTE.SUPABASE.ON_DB_UPDATE;
             return _getURL();
         },
