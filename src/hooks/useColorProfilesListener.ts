@@ -1,6 +1,6 @@
 import { useDatabaseListenerWithInitialFetch } from "@/hooks/useDatabaseListener";
 import { endpointBuilder } from "@/utils/endpointBuilder";
-import { _getColors } from "@actions/supabase/color";
+import { _getColorProfiles } from "@actions/supabase/colorProfile";
 import { ColorProfileDB } from "@siqve/supabase-services";
 
 type ColorsListenerResult = {
@@ -10,9 +10,9 @@ type ColorsListenerResult = {
 
 export const useColorProfilesListener = (): ColorsListenerResult => {
     const { value: colorProfiles, isReady: isColorProfilesReady } = useDatabaseListenerWithInitialFetch<ColorProfileDB[]>(
-        _getColors,
+        _getColorProfiles,
         endpointBuilder().colorProfile().getAll(),
-        _getColors,
+        _getColorProfiles,
     );
 
     return { colorProfiles, isColorProfilesReady };

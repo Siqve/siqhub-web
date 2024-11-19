@@ -8,8 +8,8 @@ import {
     moveHexRight,
     replaceHexInHexes,
 } from "@/utils/ledUtils";
-import { _updateColor } from "@actions/supabase/color";
-import { LedColorList } from "@components/led/LedColorList";
+import { _updateColorProfiles } from "@actions/supabase/colorProfile";
+import { LedColorProfileList } from "@components/led/LedColorProfileList";
 import { ColorPickerList } from "@components/led/picker/ColorPickerList";
 import { Spinner } from "@components/Spinner";
 import { ColorProfileDB } from "@siqve/supabase-services";
@@ -35,7 +35,7 @@ export const LedColorInterface = ({ device, ledStripSettings }: LedStaticInterfa
     const hexes: string[] = activeColorProfile.hexes.split(",");
     return (
         <div className="mx-5 flex flex-col items-center gap-6">
-            <LedColorList device={device} activeColorId={ledStripSettings.colorProfileId} />
+            <LedColorProfileList device={device} activeColorId={ledStripSettings.colorProfileId} />
             {!activeColorProfile.immutable && (
                 <ColorPickerList
                     hexes={hexes}
@@ -52,25 +52,25 @@ export const LedColorInterface = ({ device, ledStripSettings }: LedStaticInterfa
 
 function onColorChange(activeColorProfile: ColorProfileDB, color: string, index: number) {
     const newHexesString = replaceHexInHexes(activeColorProfile.hexes, color, index);
-    void _updateColor(activeColorProfile.id, { hexes: newHexesString });
+    void _updateColorProfiles(activeColorProfile.id, { hexes: newHexesString });
 }
 
 function onColorCreate(activeColorProfile: ColorProfileDB) {
     const newHexesString = appendHexToHexes(activeColorProfile.hexes, "FFFFFF");
-    void _updateColor(activeColorProfile.id, { hexes: newHexesString });
+    void _updateColorProfiles(activeColorProfile.id, { hexes: newHexesString });
 }
 
 function onColorMoveLeft(activeColorProfile: ColorProfileDB, index: number) {
     const newHexesString = moveHexLeft(activeColorProfile.hexes, index);
-    void _updateColor(activeColorProfile.id, { hexes: newHexesString });
+    void _updateColorProfiles(activeColorProfile.id, { hexes: newHexesString });
 }
 
 function onColorMoveRight(activeColorProfile: ColorProfileDB, index: number) {
     const newHexesString = moveHexRight(activeColorProfile.hexes, index);
-    void _updateColor(activeColorProfile.id, { hexes: newHexesString });
+    void _updateColorProfiles(activeColorProfile.id, { hexes: newHexesString });
 }
 
 function onColorDelete(activeColorProfile: ColorProfileDB, index: number) {
     const newHexesString = deleteHex(activeColorProfile.hexes, index);
-    void _updateColor(activeColorProfile.id, { hexes: newHexesString });
+    void _updateColorProfiles(activeColorProfile.id, { hexes: newHexesString });
 }

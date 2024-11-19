@@ -12,16 +12,16 @@ export const settingsService = {
         return db.table().device().update(deviceId, update);
     },
     ledStrip: {
-        resetActiveColor: async (device: Device): Promise<Device> => {
-            const colors = await db.table().colorProfile().selectAll();
-            if (colors.length === 0) {
+        resetActiveColorProfile: async (device: Device): Promise<Device> => {
+            const colorProfiles = await db.table().colorProfile().selectAll();
+            if (colorProfiles.length === 0) {
                 throw new Error(
-                    `Unable to reset active color for device: ${device.id}. Reason: No colors found.`,
+                    `Unable to reset active color profile for device: ${device.id}. Reason: No color profiles found.`,
                 );
             }
 
             const ledStripSettings: LedStripSettings = JSON.parse(device.settings_json);
-            ledStripSettings.colorProfileId = colors[0].id;
+            ledStripSettings.colorProfileId = colorProfiles[0].id;
 
             return settingsService.update(device.id, JSON.stringify(ledStripSettings));
         },

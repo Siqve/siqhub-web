@@ -3,21 +3,21 @@ import { CircleIcon } from "@/containers/CircleIcon";
 import { useColorProfilesListener } from "@/hooks/useColorProfilesListener";
 import { COLORS } from "@/styles/colors";
 import { Device } from "@/types/Device";
-import { _deleteColor, _insertColor } from "@actions/supabase/color";
+import { _deleteColorProfiles, _insertColorProfiles } from "@actions/supabase/colorProfile";
 import { _updateDeviceSettings } from "@actions/supabase/device";
-import { _resetActiveColor } from "@actions/supabase/device_led";
+import { _resetActiveColorProfile } from "@actions/supabase/device_led";
 import { Spinner } from "@components/Spinner";
 import { Check, Plus, XCircle } from "@phosphor-icons/react/dist/ssr";
 import { ColorProfileDB } from "@siqve/supabase-services";
 import tinycolor from "tinycolor2";
 
 
-export type LedColorListProps = {
+export type LedColorProfileListProps = {
     device: Device;
     activeColorId: number;
 };
 
-export const LedColorList = ({ device, activeColorId }: LedColorListProps) => {
+export const LedColorProfileList = ({ device, activeColorId }: LedColorProfileListProps) => {
     const { colorProfiles, isColorProfilesReady } = useColorProfilesListener();
 
     if (!isColorProfilesReady) {
@@ -39,21 +39,21 @@ export const LedColorList = ({ device, activeColorId }: LedColorListProps) => {
     };
 
     const onCreateColorClick = () => {
-        _insertColor({ hexes: "FFFFFF" }).then((newColor) => {
+        _insertColorProfiles({ hexes: "FFFFFF" }).then((newColor) => {
             updateActiveColor(newColor.id);
         });
     };
 
     const onDeleteColorClick = () => {
-        void _deleteColor(activeColorId);
-        void _resetActiveColor(device);
+        void _deleteColorProfiles(activeColorId);
+        void _resetActiveColorProfile(device);
     };
 
     const isDeleteButtonEnabled = (colorProfile: ColorProfileDB) =>
         colorProfiles.length > 1 && !colorProfile.immutable;
 
     return (
-        <CardListSection title="Colors">
+        <CardListSection title="Profiles">
             {colorProfiles.map((colorProfile) => (
                 <div className="relative" key={colorProfile.id}>
                     <CircleIcon
