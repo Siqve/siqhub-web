@@ -1,8 +1,8 @@
 export const DB_TABLES = {
-    COLOR: {
-        TABLE_NAME: "color",
+    COLOR_PROFILE: {
+        TABLE_NAME: "color_profile",
         ID: "id",
-        HEX: "hex",
+        HEXES: "hexes",
         IMMUTABLE: "immutable",
     },
     COLOR_THEME: {

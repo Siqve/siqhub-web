@@ -26,9 +26,9 @@ export const getEndpoints = () => {
     };
 
     return {
-        color(colorId?: string) {
-            _tableName = DB_TABLES.COLOR.TABLE_NAME;
-            _columnId = DB_TABLES.COLOR.ID;
+        colorProfile(colorId?: string) {
+            _tableName = DB_TABLES.COLOR_PROFILE.TABLE_NAME;
+            _columnId = DB_TABLES.COLOR_PROFILE.ID;
             _rowValue = colorId;
             return _modeFunctions;
         },

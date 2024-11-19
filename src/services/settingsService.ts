@@ -13,7 +13,7 @@ export const settingsService = {
     },
     ledStrip: {
         resetActiveColor: async (device: Device): Promise<Device> => {
-            const colors = await db.table().color().selectAll();
+            const colors = await db.table().colorProfile().selectAll();
             if (colors.length === 0) {
                 throw new Error(
                     `Unable to reset active color for device: ${device.id}. Reason: No colors found.`,
@@ -21,7 +21,7 @@ export const settingsService = {
             }
 
             const ledStripSettings: LedStripSettings = JSON.parse(device.settings_json);
-            ledStripSettings.activeColorId = colors[0].id;
+            ledStripSettings.colorProfileId = colors[0].id;
 
             return settingsService.update(device.id, JSON.stringify(ledStripSettings));
         },
