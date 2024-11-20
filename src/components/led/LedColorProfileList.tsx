@@ -3,6 +3,7 @@ import { CircleIcon } from "@/containers/CircleIcon";
 import { useColorProfilesListener } from "@/hooks/useColorProfilesListener";
 import { COLORS } from "@/styles/colors";
 import { Device } from "@/types/Device";
+import { LedStripSettings } from "@/types/Settings";
 import { _deleteColorProfiles, _insertColorProfiles } from "@actions/supabase/colorProfile";
 import { _updateDeviceSettings } from "@actions/supabase/device";
 import { _resetActiveColorProfile } from "@actions/supabase/device_led";
@@ -13,10 +14,10 @@ import tinycolor from "tinycolor2";
 
 export type LedColorProfileListProps = {
     device: Device;
-    activeColorId: number;
+    ledStripSettings: LedStripSettings;
 };
 
-export const LedColorProfileList = ({ device, activeColorId }: LedColorProfileListProps) => {
+export const LedColorProfileList = ({ device, ledStripSettings }: LedColorProfileListProps) => {
     const { colorProfiles, isColorProfilesReady } = useColorProfilesListener();
 
     if (!isColorProfilesReady) {
@@ -29,6 +30,7 @@ export const LedColorProfileList = ({ device, activeColorId }: LedColorProfileLi
 
     const updateActiveColorProfile = (colorProfileId: number) => {
         void _updateDeviceSettings(device.id, {
+            ...ledStripSettings,
             colorProfileId,
         });
     };
@@ -44,7 +46,7 @@ export const LedColorProfileList = ({ device, activeColorId }: LedColorProfileLi
     };
 
     const onDeleteColorClick = () => {
-        void _deleteColorProfiles(activeColorId);
+        void _deleteColorProfiles(ledStripSettings.colorProfileId);
         void _resetActiveColorProfile(device);
     };
 
@@ -60,21 +62,22 @@ export const LedColorProfileList = ({ device, activeColorId }: LedColorProfileLi
                         colors={colorProfile.hexes.split(",")}
                         onClick={() => onColorSelect(colorProfile)}
                     >
-                        {activeColorId === colorProfile.id && (
+                        {ledStripSettings.colorProfileId === colorProfile.id && (
                             <Check
                                 color={`#${tinycolor(colorProfile.hexes.split(",")[0]).darken(50).toHex()}`}
                                 size="42"
                             />
                         )}
                     </CircleIcon>
-                    {activeColorId === colorProfile.id && isDeleteButtonEnabled(colorProfile) && (
-                        <XCircle
-                            className="absolute right-[-7px] top-[-7px]"
-                            color={COLORS.error}
-                            size="30"
-                            onClick={onDeleteColorClick}
-                        ></XCircle>
-                    )}
+                    {ledStripSettings.colorProfileId === colorProfile.id &&
+                        isDeleteButtonEnabled(colorProfile) && (
+                            <XCircle
+                                className="absolute right-[-7px] top-[-7px]"
+                                color={COLORS.error}
+                                size="30"
+                                onClick={onDeleteColorClick}
+                            ></XCircle>
+                        )}
                 </div>
             ))}
 

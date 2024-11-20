@@ -35,7 +35,7 @@ export const LedColorInterface = ({ device, ledStripSettings }: LedStaticInterfa
     const hexes: string[] = activeColorProfile.hexes.split(",");
     return (
         <div className="mx-5 flex flex-col items-center gap-6">
-            <LedColorProfileList device={device} activeColorId={ledStripSettings.colorProfileId} />
+            <LedColorProfileList device={device} ledStripSettings={ledStripSettings} />
             {!activeColorProfile.immutable && (
                 <ColorPickerList
                     hexes={hexes}
