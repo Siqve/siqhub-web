@@ -6,9 +6,9 @@ export type DeviceUpdateDB = TablesUpdate<"device">
 
 export type DeviceTypeDB = Tables<"device_type">
 
-export type ColorDB = Tables<"color">
-export type ColorInsertDB = TablesInsert<"color">
-export type ColorUpdateDB = TablesUpdate<"color">
+export type ColorProfileDB = Tables<"color_profile">
+export type ColorProfileInsertDB = TablesInsert<"color_profile">
+export type ColorProfileUpdateDB = TablesUpdate<"color_profile">
 
 export type ColorThemeDB = Tables<"color_theme">
 
