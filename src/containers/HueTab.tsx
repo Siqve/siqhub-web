@@ -33,7 +33,11 @@ export const HueTab = ({ tabNames, startTabIndex, children }: HueTabProps) => {
                     </button>
                 ))}
             </div>
-            {childrenArray[activeTabIndex]}
+            {childrenArray.map((child, index) => (
+                <div key={index} className={activeTabIndex === index ? "" : "hidden"}>
+                    {child}
+                </div>
+            ))}
         </div>
     );
 };
