@@ -1,5 +1,5 @@
 "use client";
-import { HueTab } from "@/containers/HueTab";
+import { HubTab } from "@/containers/HubTab";
 import { useDeviceListener } from "@/hooks/useDeviceListener";
 import { Device } from "@/types/Device";
 import { LedStripSettings } from "@/types/Settings";
@@ -25,10 +25,10 @@ export const LedStripController = ({ initialDevice }: LedStripControllerProps) =
 
     return (
         <div className="flex justify-center py-4">
-            <HueTab tabNames={["Colors", "Settings"]} startTabIndex={0}>
+            <HubTab tabNames={["Colors", "Settings"]} startTabIndex={0}>
                 <LedColorInterface device={device} ledStripSettings={ledStripSettings} />
                 <p>Test2</p>
-            </HueTab>
+            </HubTab>
         </div>
     );
 };

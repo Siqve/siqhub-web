@@ -1,4 +1,4 @@
-import { HueSlider } from "@components/HueSlider";
+import { HubSlider } from "@components/HubSlider";
 import { Sun, SunDim } from "@phosphor-icons/react";
 import "rc-slider/assets/index.css";
 import { useEffect, useState } from "react";
@@ -40,7 +40,7 @@ export const ColorPicker = ({ inputColor, index, onChange }: ColorPickerProps) =
             <div className="h-[250px]">
                 <HexColorPicker color={color} onChange={onHexColorPickerChange} />
             </div>
-            <HueSlider
+            <HubSlider
                 startValue={colorBrightness}
                 onMove={onBrightnessChange}
                 activeBarColor={color}

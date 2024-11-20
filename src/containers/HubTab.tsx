@@ -8,7 +8,7 @@ export type HueTabProps = {
     children: ReactNode;
 };
 
-export const HueTab = ({ tabNames, startTabIndex, children }: HueTabProps) => {
+export const HubTab = ({ tabNames, startTabIndex, children }: HueTabProps) => {
     const [activeTabIndex, setActiveTabIndex] = useState<number>(startTabIndex ?? 0);
     if (tabNames.length === 0) return null;
     const childrenArray = Children.toArray(children);

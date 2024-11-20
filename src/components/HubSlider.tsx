@@ -12,7 +12,7 @@ export type SliderProps = {
     IconRight?: Icon;
 };
 
-export const HueSlider = ({
+export const HubSlider = ({
     onMove,
     startValue,
     activeBarColor,
