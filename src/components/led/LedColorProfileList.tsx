@@ -27,19 +27,19 @@ export const LedColorProfileList = ({ device, activeColorId }: LedColorProfileLi
         return <h2>Error, failed to load colors!</h2>;
     }
 
-    const updateActiveColor = (colorId: number) => {
+    const updateActiveColorProfile = (colorProfileId: number) => {
         void _updateDeviceSettings(device.id, {
-            colorProfileId: colorId,
+            colorProfileId,
         });
     };
 
-    const onColorSelect = (color: ColorProfileDB) => {
-        updateActiveColor(color.id);
+    const onColorSelect = (colorProfile: ColorProfileDB) => {
+        updateActiveColorProfile(colorProfile.id);
     };
 
     const onCreateColorClick = () => {
-        _insertColorProfiles({ hexes: "FFFFFF" }).then((newColor) => {
-            updateActiveColor(newColor.id);
+        _insertColorProfiles({ hexes: "FFFFFF" }).then((newColorProfile) => {
+            updateActiveColorProfile(newColorProfile.id);
         });
     };
 
