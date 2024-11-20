@@ -1,9 +1,9 @@
 import { Header } from "@/containers/Header";
 import { COLORS } from "@/styles/colors";
+import { Device } from "@/types/Device";
 import { HueGraphic } from "@components/graphic/HueGraphic";
 import { X } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-import { Device } from "@/types/Device";
 
 export const DeviceHeader = ({ device }: { device: Device }) => {
     return (

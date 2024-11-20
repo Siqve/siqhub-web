@@ -19,7 +19,6 @@ export const useDatabaseListener = <T>(
 
     const handleUpdate = useCallback((updatedValue: T | undefined) => {
         setState({ value: updatedValue, isReady: true });
-
     }, []);
 
     // Initialize the listener

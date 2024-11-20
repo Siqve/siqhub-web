@@ -1,7 +1,7 @@
+import { db } from "@/services/dbService";
 import { Device } from "@/types/Device";
 import { LedStripSettings } from "@/types/Settings";
 import { DeviceUpdateDB } from "@siqve/supabase-services";
-import { db } from "@/services/dbService";
 
 export const settingsService = {
     update: async (deviceId: string, settings: string): Promise<Device> => {

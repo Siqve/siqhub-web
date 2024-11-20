@@ -1,5 +1,5 @@
-import { DeviceType } from "./DeviceType";
 import { ColorTheme } from "./ColorTheme";
+import { DeviceType } from "./DeviceType";
 
 export type Device = {
     id: string;

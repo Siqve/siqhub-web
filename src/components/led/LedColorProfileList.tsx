@@ -11,7 +11,6 @@ import { Check, Plus, XCircle } from "@phosphor-icons/react/dist/ssr";
 import { ColorProfileDB } from "@siqve/supabase-services";
 import tinycolor from "tinycolor2";
 
-
 export type LedColorProfileListProps = {
     device: Device;
     activeColorId: number;

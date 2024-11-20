@@ -9,11 +9,12 @@ type ColorsListenerResult = {
 };
 
 export const useColorProfilesListener = (): ColorsListenerResult => {
-    const { value: colorProfiles, isReady: isColorProfilesReady } = useDatabaseListenerWithInitialFetch<ColorProfileDB[]>(
-        _getColorProfiles,
-        endpointBuilder().colorProfile().getAll(),
-        _getColorProfiles,
-    );
+    const { value: colorProfiles, isReady: isColorProfilesReady } =
+        useDatabaseListenerWithInitialFetch<ColorProfileDB[]>(
+            _getColorProfiles,
+            endpointBuilder().colorProfile().getAll(),
+            _getColorProfiles,
+        );
 
     return { colorProfiles, isColorProfilesReady };
 };

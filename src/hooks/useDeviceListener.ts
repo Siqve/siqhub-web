@@ -1,6 +1,6 @@
 import { useDatabaseListener } from "@/hooks/useDatabaseListener";
-import { endpointBuilder } from "@/utils/endpointBuilder";
 import { Device } from "@/types/Device";
+import { endpointBuilder } from "@/utils/endpointBuilder";
 
 type DeviceListenerReturn = {
     device: Device | undefined;

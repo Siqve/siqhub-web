@@ -28,4 +28,4 @@ export const deleteHex = (hexes: string, index: number): string => {
     const hexArray = hexes.split(",");
     hexArray.splice(index, 1);
     return hexArray.join(",");
-}
+};

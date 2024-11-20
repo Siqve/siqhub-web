@@ -1,1 +1,1 @@
-export * from "./isSupabaseConfigured"
+export * from "./isSupabaseConfigured";

@@ -12,10 +12,11 @@ type ColorListenerReturn = {
 export const useColorProfileListener = (colorId: string): ColorListenerReturn => {
     const getColorProfile = useCallback(() => _getColorProfile(colorId), [colorId]);
 
-    const { value: colorProfile, isReady: isColorProfileReady } = useDatabaseListenerWithInitialFetch<ColorProfileDB>(
-        getColorProfile,
-        endpointBuilder().colorProfile(colorId).updates(),
-    );
+    const { value: colorProfile, isReady: isColorProfileReady } =
+        useDatabaseListenerWithInitialFetch<ColorProfileDB>(
+            getColorProfile,
+            endpointBuilder().colorProfile(colorId).updates(),
+        );
 
     return { colorProfile, isColorProfileReady };
 };

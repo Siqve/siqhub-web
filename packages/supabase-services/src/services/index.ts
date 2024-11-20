@@ -1,2 +1,2 @@
-export * from "../utils/createRealtimeChannel"
-export * from "./supabaseService"
+export * from "../utils/createRealtimeChannel";
+export * from "./supabaseService";

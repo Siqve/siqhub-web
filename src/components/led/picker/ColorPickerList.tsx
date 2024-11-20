@@ -19,7 +19,7 @@ export const ColorPickerList = ({
     onColorCreate,
     onColorMoveRight,
     onColorMoveLeft,
-    onColorDelete
+    onColorDelete,
 }: ColorPickerListProps) => {
     return (
         <div className="grid gap-x-12 gap-y-5 md:grid-cols-2">
@@ -28,8 +28,10 @@ export const ColorPickerList = ({
                     <div className="flex justify-center gap-2">
                         {index !== 0 && (
                             <ArrowFatLeft
-                                color={COLORS["neutral-content"]} size="38"
-                            onClick={() => onColorMoveLeft(index)} />
+                                color={COLORS["neutral-content"]}
+                                size="38"
+                                onClick={() => onColorMoveLeft(index)}
+                            />
                         )}
                         {hexes.length > 1 && (
                             <XCircle
@@ -39,8 +41,10 @@ export const ColorPickerList = ({
                             ></XCircle>
                         )}
                         {index !== hexes.length - 1 && (
-                            <ArrowFatRight color={COLORS["neutral-content"]} size="38"
-                            onClick={() => onColorMoveRight(index)}
+                            <ArrowFatRight
+                                color={COLORS["neutral-content"]}
+                                size="38"
+                                onClick={() => onColorMoveRight(index)}
                             />
                         )}
                     </div>

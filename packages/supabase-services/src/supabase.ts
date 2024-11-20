@@ -39,5 +39,3 @@ export const middlewareCheck = async (request: NextRequest) => {
 
     return { user, supabaseResponse };
 };
-
-

@@ -6,8 +6,8 @@ import {
 import { AuthTokenResponsePassword } from "@supabase/supabase-js";
 import { NextRequest } from "next/server";
 import { getSupabaseClient, middlewareCheck, SUPABASE_ENVS } from "../supabase";
-import { createRealtimeChannel } from "../utils/createRealtimeChannel";
 import { SortOrder } from "../types";
+import { createRealtimeChannel } from "../utils/createRealtimeChannel";
 
 type eq = {
     column: string;

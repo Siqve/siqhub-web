@@ -1,17 +1,23 @@
 "use server";
 
-import { ColorProfileDB, ColorProfileInsertDB, ColorProfileUpdateDB } from "@siqve/supabase-services";
 import { db } from "@/services/dbService";
+import {
+    ColorProfileDB,
+    ColorProfileInsertDB,
+    ColorProfileUpdateDB,
+} from "@siqve/supabase-services";
 
 export const _getColorProfile = async (colorId: string): Promise<ColorProfileDB | undefined> => {
     return db.table().colorProfile().select(colorId);
 };
 
 export const _getColorProfiles = async (): Promise<ColorProfileDB[] | undefined> => {
-    return db.table().colorProfile().selectAll({column: "id", order: "asc" });
+    return db.table().colorProfile().selectAll({ column: "id", order: "asc" });
 };
 
-export const _insertColorProfiles = async (colorInsert: ColorProfileInsertDB): Promise<ColorProfileDB> => {
+export const _insertColorProfiles = async (
+    colorInsert: ColorProfileInsertDB,
+): Promise<ColorProfileDB> => {
     return db.table().colorProfile().insert(colorInsert);
 };
 
