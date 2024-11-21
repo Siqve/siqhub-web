@@ -2,7 +2,7 @@
     "name": "siqhue",
     "version": "0.1.0",
     "private": true,
-    "packageManager": "npm@10.9.0",
+    "packageManager": "npm@10.9.1",
     "scripts": {
         "dev": "next dev",
         "d": "turbo run dev",
