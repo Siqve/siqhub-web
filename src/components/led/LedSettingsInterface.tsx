@@ -19,7 +19,6 @@ export const LedSettingsInterface = ({ device, ledStripSettings }: LedSettingsIn
         useState<LedStripSettings>(ledStripSettings);
 
     const updateSetting = useDebouncedCallback(() => {
-        console.log(currentLedStripSettings);
         _updateDeviceSettings(device.id, currentLedStripSettings).then((updatedDevice) => {
             setCurrentLedStripSettings(JSON.parse(updatedDevice.settings_json));
         });
