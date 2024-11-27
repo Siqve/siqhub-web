@@ -5,13 +5,13 @@ import { DeviceHeader } from "@components/device/DeviceHeader";
 import { redirect } from "next/navigation";
 
 type DevicePageProps = {
-    searchParams?: { [key: string]: string | string[] | undefined };
+    params?: Promise<{ id: string }>;
 };
 
-const DevicePage = async ({ searchParams }: DevicePageProps) => {
-    if (typeof searchParams?.id !== "string") redirect("/");
-
-    const device = await db.table().device().select(searchParams.id);
+const DevicePage = async ({ params }: DevicePageProps) => {
+    const slugParams = await params;
+    if (!slugParams?.id) redirect("/");
+    const device = await db.table().device().select(slugParams.id);
     if (!device) redirect("/");
 
     return (
