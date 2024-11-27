@@ -11,13 +11,14 @@ export const createClientFromCookies = (
 
     return createServerClient(url, apiKey, {
         cookies: {
-            getAll() {
-                return cookieStore.getAll();
+            async getAll() {
+                return (await cookieStore).getAll();
             },
-            setAll(cookiesToSet) {
+            async setAll(cookiesToSet) {
                 try {
+                    const resolvedCookiesStore = await cookieStore;
                     cookiesToSet.forEach(({ name, value, options }) =>
-                        cookieStore.set(name, value, options),
+                        resolvedCookiesStore.set(name, value, options),
                     );
                 } catch {
                     // The `setAll` method was called from a Server Component.

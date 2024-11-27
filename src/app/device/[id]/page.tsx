@@ -4,8 +4,14 @@ import { LedStripController } from "@components/controllers/LedStripController";
 import { DeviceHeader } from "@components/device/DeviceHeader";
 import { redirect } from "next/navigation";
 
-const DevicePage = async ({ params }: { params: { id: string } }) => {
-    const device = await db.table().device().select(params.id);
+type DevicePageProps = {
+    params?: Promise<{ id: string }>;
+};
+
+const DevicePage = async ({ params }: DevicePageProps) => {
+    const slugParams = await params;
+    if (!slugParams?.id) redirect("/");
+    const device = await db.table().device().select(slugParams.id);
     if (!device) redirect("/");
 
     return (
