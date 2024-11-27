@@ -1,9 +1,9 @@
 import { EVENT_STREAM_HEADERS } from "@/app/api/constants";
+import { db } from "@/services/dbService";
 import { sendDataWithStreamController } from "@/utils/apiUtils";
+import { getSupabaseClient } from "@siqve/supabase-services/dist/supabase";
 import { RealtimeChannel } from "@supabase/realtime-js";
 import { NextRequest } from "next/server";
-import { db } from "@/services/dbService";
-import { getSupabaseClient } from "@siqve/supabase-services/dist/supabase";
 
 // Disables the pre-rendering of the page
 export const dynamic = "force-dynamic";
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
 
     let settingsRealtimeChannel: RealtimeChannel;
 
-        // Need to store supabaseClient on the request object, since we need to access cookies
+    // Need to store supabaseClient on the request object, since we need to access cookies
     let supabaseClient = getSupabaseClient();
     return new Response(
         new ReadableStream({

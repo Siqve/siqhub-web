@@ -1,6 +1,6 @@
 import { CardListSection } from "@/containers/CardListSection";
-import { DeviceIcon } from "@components/DeviceIcon";
 import { db } from "@/services/dbService";
+import { DeviceIcon } from "@components/DeviceIcon";
 
 export const DeviceList = async () => {
     const devices = await db.table().device().selectAll();

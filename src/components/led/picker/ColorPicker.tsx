@@ -1,4 +1,4 @@
-import { HueSlider } from "@components/HueSlider";
+import { HubSlider } from "@components/HubSlider";
 import { Sun, SunDim } from "@phosphor-icons/react";
 import "rc-slider/assets/index.css";
 import { useEffect, useState } from "react";
@@ -8,10 +8,11 @@ import { useDebouncedCallback } from "use-debounce";
 
 export type ColorPickerProps = {
     inputColor: string;
-    onChange: (color: string) => void;
+    index: number;
+    onChange: (color: string, index: number) => void;
 };
 
-export const ColorPicker = ({ inputColor, onChange }: ColorPickerProps) => {
+export const ColorPicker = ({ inputColor, index, onChange }: ColorPickerProps) => {
     const [color, setColor] = useState(inputColor);
 
     useEffect(() => {
@@ -20,7 +21,7 @@ export const ColorPicker = ({ inputColor, onChange }: ColorPickerProps) => {
 
     const debouncedColorUpdate = useDebouncedCallback((color: string) => {
         setColor(color);
-        onChange(color);
+        onChange(color, index);
     }, 250);
 
     const onHexColorPickerChange = (value: string) => {
@@ -36,10 +37,10 @@ export const ColorPicker = ({ inputColor, onChange }: ColorPickerProps) => {
     const colorBrightness = tinycolor(color).toHsv().v * 100;
     return (
         <div className="flex flex-col gap-4">
-            <div className="h-[200px] w-[250px]">
+            <div className="h-[250px]">
                 <HexColorPicker color={color} onChange={onHexColorPickerChange} />
             </div>
-            <HueSlider
+            <HubSlider
                 startValue={colorBrightness}
                 onMove={onBrightnessChange}
                 activeBarColor={color}

@@ -1,12 +1,12 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "target": "ESNext",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "noEmit": false,
-    "declaration": true,
-    "noImplicitAny": false
-  },
-  "include": ["src/**/*"]
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "target": "ESNext",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "noEmit": false,
+        "declaration": true,
+        "noImplicitAny": false
+    },
+    "include": ["src/**/*"]
 }

@@ -1,14 +1,13 @@
 import { EVENT_STREAM_HEADERS } from "@/app/api/constants";
+import { db } from "@/services/dbService";
 import { sendDataWithStreamController } from "@/utils/apiUtils";
+import { getSupabaseClient } from "@siqve/supabase-services/dist/supabase";
 import { RealtimeChannel } from "@supabase/realtime-js";
 import { NextRequest } from "next/server";
-import { db } from "@/services/dbService";
-import { getSupabaseClient } from "@siqve/supabase-services/dist/supabase";
 
 // Disables the pre-rendering of the page
 export const dynamic = "force-dynamic";
 export const maxDuration = 60; // This function can run for a maximum of 5 seconds
-
 
 export async function GET(request: NextRequest) {
     const tableName: string | null = request.nextUrl.searchParams.get("tableName");

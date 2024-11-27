@@ -1,9 +1,9 @@
 import { DB_TABLES } from "@/constants/database";
 import { supabaseService } from "@siqve/supabase-services";
 import {
-    ColorDB,
-    ColorInsertDB,
-    ColorUpdateDB,
+    ColorProfileDB,
+    ColorProfileInsertDB,
+    ColorProfileUpdateDB,
     Device,
     DeviceInsertDB,
     DeviceUpdateDB,
@@ -14,14 +14,14 @@ import { RealtimeChannel, RealtimePostgresChangesPayload } from "@supabase/realt
 const DEVICE_QUERY = `${DB_TABLES.DEVICE.ID}, ${DB_TABLES.DEVICE.IP}, ${DB_TABLES.DEVICE.NAME}, ${DB_TABLES.DEVICE.TYPE}, ${DB_TABLES.DEVICE.SETTINGS_JSON}, \
 ${DB_TABLES.DEVICE.COLOR_THEME}(${DB_TABLES.COLOR_THEME.NAME}, ${DB_TABLES.COLOR_THEME.GRADIENT_CLASS}, ${DB_TABLES.COLOR_THEME.TEXT_CLASS})`;
 
-const COLOR_QUERY = `${DB_TABLES.COLOR.ID}, ${DB_TABLES.COLOR.HEX}, ${DB_TABLES.COLOR.IMMUTABLE}`;
+const COLOR_QUERY = `${DB_TABLES.COLOR_PROFILE.ID}, ${DB_TABLES.COLOR_PROFILE.HEXES}, ${DB_TABLES.COLOR_PROFILE.IMMUTABLE}`;
 
 export const db = {
     table: () => ({
-        color: () => {
-            return tableActions<ColorDB, ColorInsertDB, ColorUpdateDB>(
-                DB_TABLES.COLOR.TABLE_NAME,
-                DB_TABLES.COLOR.ID,
+        colorProfile: () => {
+            return tableActions<ColorProfileDB, ColorProfileInsertDB, ColorProfileUpdateDB>(
+                DB_TABLES.COLOR_PROFILE.TABLE_NAME,
+                DB_TABLES.COLOR_PROFILE.ID,
                 COLOR_QUERY,
             );
         },

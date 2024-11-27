@@ -8,7 +8,7 @@ export type HueTabProps = {
     children: ReactNode;
 };
 
-export const HueTab = ({ tabNames, startTabIndex, children }: HueTabProps) => {
+export const HubTab = ({ tabNames, startTabIndex, children }: HueTabProps) => {
     const [activeTabIndex, setActiveTabIndex] = useState<number>(startTabIndex ?? 0);
     if (tabNames.length === 0) return null;
     const childrenArray = Children.toArray(children);
@@ -33,7 +33,11 @@ export const HueTab = ({ tabNames, startTabIndex, children }: HueTabProps) => {
                     </button>
                 ))}
             </div>
-            {childrenArray[activeTabIndex]}
+            {childrenArray.map((child, index) => (
+                <div key={index} className={activeTabIndex === index ? "" : "hidden"}>
+                    {child}
+                </div>
+            ))}
         </div>
     );
 };

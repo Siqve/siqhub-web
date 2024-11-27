@@ -47,7 +47,7 @@ body {
     @apply bg-gradient-to-br;
     @apply from-base-100;
     @apply to-base-300;
-    @apply h-[100vh];
+    @apply min-h-[100vh];
 }
 
 main {
