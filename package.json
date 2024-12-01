@@ -1,6 +1,6 @@
 {
-    "name": "siqhue",
-    "version": "0.1.0",
+    "name": "siqhub",
+    "version": "1.0.0",
     "private": true,
     "packageManager": "npm@10.9.0",
     "scripts": {
