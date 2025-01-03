@@ -1,12 +1,9 @@
 import { Device } from "@/types/Device";
 import { LedStripSettings } from "@/types/Settings";
-import { appendHexToHexes, replaceHexInHexes } from "@/utils/ledUtils";
-import { _updateColorProfiles } from "@actions/supabase/colorProfile";
 import { _updateDeviceSettings } from "@actions/supabase/device";
 import { HubSlider } from "@components/HubSlider";
 import { Lightbulb, Speedometer } from "@phosphor-icons/react";
-import { ColorProfileDB } from "@siqve/supabase-services";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 type LedSettingsInterfaceProps = {
@@ -32,13 +29,17 @@ export const LedSettingsInterface = ({ device, ledStripSettings }: LedSettingsIn
         updateSetting();
     };
 
-    const onPixelColorHopChange = (pixelColorHop: number) => {
+    const onFrequencyChange = (frequency: number) => {
         setCurrentLedStripSettings((currentLedStripSettings) => ({
             ...currentLedStripSettings,
-            pixelColorHop,
+            frequency,
         }));
         updateSetting();
     };
+
+    useEffect(() => {
+        setCurrentLedStripSettings(ledStripSettings);
+    }, [ledStripSettings]);
 
     return (
         <div className="mx-5 flex w-full flex-col items-center gap-6">
@@ -54,26 +55,17 @@ export const LedSettingsInterface = ({ device, ledStripSettings }: LedSettingsIn
                 />
             </div>
             <div className="w-full">
-                <p>{`Pixel Color Hop: ${currentLedStripSettings.pixelColorHop}`}</p>
+                <p>{`Frequency: ${currentLedStripSettings.frequency}`}</p>
                 <HubSlider
-                    startValue={ledStripSettings.pixelColorHop}
-                    onMove={onPixelColorHopChange}
+                    startValue={currentLedStripSettings.frequency}
+                    onMove={onFrequencyChange}
                     IconLeft={Lightbulb}
                     IconRight={Lightbulb}
                     min={0}
-                    max={1000}
+                    max={20}
+                    step={0.5}
                 />
             </div>
         </div>
     );
 };
-
-function onColorChange(activeColorProfile: ColorProfileDB, color: string, index: number) {
-    const newHexesString = replaceHexInHexes(activeColorProfile.hexes, color, index);
-    void _updateColorProfiles(activeColorProfile.id, { hexes: newHexesString });
-}
-
-function onColorCreate(activeColorProfile: ColorProfileDB) {
-    const newHexesString = appendHexToHexes(activeColorProfile.hexes, "FFFFFF");
-    void _updateColorProfiles(activeColorProfile.id, { hexes: newHexesString });
-}

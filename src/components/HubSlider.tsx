@@ -3,6 +3,7 @@ import type { Icon } from "@phosphor-icons/react/dist/lib/types";
 import Slider, { SliderProps } from "rc-slider";
 import "rc-slider/assets/index.css";
 import type { SliderStyles } from "rc-slider/lib/interface";
+import { useEffect, useState } from "react";
 
 export type HubSliderProps = {
     onMove: (position: number) => void;
@@ -10,8 +11,6 @@ export type HubSliderProps = {
     activeBarColor?: string;
     IconLeft?: Icon;
     IconRight?: Icon;
-    min?: number;
-    max?: number;
 } & SliderProps;
 
 export const HubSlider = ({
@@ -22,11 +21,15 @@ export const HubSlider = ({
     IconRight,
     min,
     max,
+    step,
 }: HubSliderProps) => {
+    const [position, setPosition] = useState<number>(startValue);
+
     const baseColor = COLORS["base-content"];
     const onChange = (position: number | number[]) => {
         if (typeof position === "number") {
             onMove(position);
+            setPosition(position);
         }
     };
 
@@ -57,17 +60,23 @@ export const HubSlider = ({
         }),
     };
 
+    useEffect(() => {
+        setPosition(startValue);
+    }, [startValue]);
+
     return (
         <div className="flex w-full items-center justify-between gap-2">
             {IconLeft && <IconLeft size={30} color={baseColor} />}
             <Slider
                 defaultValue={startValue}
+                value={position}
                 styles={sliderStyle}
                 className="touch-none [&>*]:!shadow-none"
                 onChange={onChange}
                 min={min}
                 max={max}
                 marks={marks}
+                step={step}
             />
             {IconRight && <IconRight size={34} color={baseColor} />}
         </div>

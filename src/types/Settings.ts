@@ -1,6 +1,6 @@
 export type LedStripSettings = {
     colorProfileId: number;
     fps: number;
-    pixelColorHop: number;
+    frequency: number;
     //TODO: fps, etc.
 };
