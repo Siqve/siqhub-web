@@ -15,26 +15,18 @@ export const LedSettingsInterface = ({ device, ledStripSettings }: LedSettingsIn
     const [currentLedStripSettings, setCurrentLedStripSettings] =
         useState<LedStripSettings>(ledStripSettings);
 
-    const updateSetting = useDebouncedCallback(() => {
+    const persistSettingsUpdate = useDebouncedCallback(() => {
         _updateDeviceSettings(device.id, currentLedStripSettings).then((updatedDevice) => {
             setCurrentLedStripSettings(JSON.parse(updatedDevice.settings_json));
         });
     }, 250);
 
-    const onFpsChange = (fps: number) => {
+    const onSettingUpdate = (setting: Partial<LedStripSettings>) => {
         setCurrentLedStripSettings((currentLedStripSettings) => ({
             ...currentLedStripSettings,
-            fps,
+            ...setting,
         }));
-        updateSetting();
-    };
-
-    const onFrequencyChange = (frequency: number) => {
-        setCurrentLedStripSettings((currentLedStripSettings) => ({
-            ...currentLedStripSettings,
-            frequency,
-        }));
-        updateSetting();
+        persistSettingsUpdate();
     };
 
     useEffect(() => {
@@ -47,7 +39,7 @@ export const LedSettingsInterface = ({ device, ledStripSettings }: LedSettingsIn
                 <p>{`FPS: ${currentLedStripSettings.fps}`}</p>
                 <HubSlider
                     startValue={ledStripSettings.fps}
-                    onMove={onFpsChange}
+                    onMove={(fps: number) => onSettingUpdate({ fps })}
                     IconLeft={Speedometer}
                     IconRight={Speedometer}
                     min={0}
@@ -58,13 +50,23 @@ export const LedSettingsInterface = ({ device, ledStripSettings }: LedSettingsIn
                 <p>{`Frequency: ${currentLedStripSettings.frequency}`}</p>
                 <HubSlider
                     startValue={currentLedStripSettings.frequency}
-                    onMove={onFrequencyChange}
+                    onMove={(frequency: number) => onSettingUpdate({ frequency })}
                     IconLeft={Lightbulb}
                     IconRight={Lightbulb}
                     min={0}
                     max={20}
-                    step={0.5}
+                    step={0.2}
                 />
+            </div>
+            <div className="flex w-full justify-center">
+                <div className="flex gap-2">
+                    <p>Reverse: </p>
+                    <input
+                        type="checkbox"
+                        checked={currentLedStripSettings.reverse}
+                        onChange={(event) => onSettingUpdate({ reverse: event.target.checked })}
+                    />
+                </div>
             </div>
         </div>
     );
